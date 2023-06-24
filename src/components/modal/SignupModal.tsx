@@ -45,11 +45,11 @@ const SignupModal: React.FC<SignupModalProps> = ({ first_url, visible, onClose }
                   </div>
                   <div className='pb-3'>
                     <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >E-mail</h2>
-                    <input name='last_name' onChange={(e) => handleSignupSchema(e)} value={signupSchema.email} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
+                    <input name='email' onChange={(e) => handleSignupSchema(e)} value={signupSchema.email} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
                   </div>
                   <div className='pb-3'>
                     <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >Password</h2>
-                    <input name='password' onChange={(e) => handleSignupSchema(e)} value={signupSchema.password} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
+                    <input name='password' onChange={(e) => handleSignupSchema(e)} value={signupSchema.password} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="password" />
                   </div>
                   <div>
                     <h2 style={{ fontSize: 18.4 }} className="pb-1 font-medium font-noto" >First url</h2>

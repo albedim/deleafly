@@ -14,6 +14,10 @@
   display: flex;
 }
 
+.block-flex{
+  display: block;
+}
+
 @media screen and (max-width: 1314px) {
   .flex-none{
     display: none;
@@ -26,5 +30,8 @@
   }
   .flex-block{
     display: block;
+  }
+  .block-flex{
+    display: flex;
   }
 }

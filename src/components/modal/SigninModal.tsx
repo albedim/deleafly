@@ -40,7 +40,7 @@ const SigninModal: React.FC<SigninmodalProps> = ({ visible, onClose }) => {
                   </div>
                   <div className='pb-3'>
                     <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >Password</h2>
-                    <input name='password' onChange={(e) => handleSigninSchema(e)} value={signinSchema.password} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
+                    <input name='password' onChange={(e) => handleSigninSchema(e)} value={signinSchema.password} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="password" />
                   </div>
                   <div  className="justify-between flex pt-4">
                     <div></div>
