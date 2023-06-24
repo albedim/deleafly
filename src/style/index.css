@@ -1,0 +1,30 @@
+.flex-none{
+  display: flex;
+}
+
+.none-block{
+  display: none;
+}
+
+.none-flex{
+  display: none;
+}
+
+.flex-block{
+  display: flex;
+}
+
+@media screen and (max-width: 1314px) {
+  .flex-none{
+    display: none;
+  }
+  .none-block{
+    display: block;
+  }
+  .none-flex{
+    display: flex;
+  }
+  .flex-block{
+    display: block;
+  }
+}
