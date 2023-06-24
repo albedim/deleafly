@@ -22,15 +22,15 @@ const Header: React.FC<HeaderProps> = ({
       <Logo style={{}} class_name="none-flex" />
       <div style={{ paddingRight: 284 }} className="flex-none">
         <div style={{ paddingRight: 184 }} className="items-center flex">
-          <div onClick={() => navigate("/")} style={{ color: route_name == 'get_started' ? "#ccd0af" : "#404727", fontSize: 21.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2>Get started</h2></div>
-          <div onClick={() => navigate("/about")} style={{ color: route_name == 'about_us' ? "#ccd0af" : "#404727", fontSize: 21.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2>About us</h2></div>
-          <div onClick={() => navigate("/dashboard")} style={{ color: route_name == 'dashboard' ? "#ccd0af" : "#404727", fontSize: 21.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2>Dashboard</h2></div>
+          <div onClick={() => navigate("/")} style={{ color: route_name == 'get_started' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2>Get started</h2></div>
+          <div onClick={() => navigate("/about")} style={{ color: route_name == 'about_us' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2>About us</h2></div>
+          <div onClick={() => navigate("/dashboard")} style={{ color: route_name == 'dashboard' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2>Dashboard</h2></div>
         </div>
         <div className="items-center flex">
-          <IoLogIn onClick={() => setModalOptions({ visible: true })} color="#404727" size={34}/>
+          <IoLogIn onClick={() => setModalOptions({ visible: true })} color="#404727" size={30}/>
         </div>
       </div>
-      <IoMenu className="none-block" size={54} />
+      <IoMenu className="none-block" size={50} />
     </div>
   );
 

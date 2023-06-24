@@ -38,26 +38,26 @@ const SignupModal: React.FC<SignupModalProps> = ({ first_url, visible, onClose }
                   <div></div>
                   <div><RiCloseFill className="cursor-pointer" onClick={onClose} color="gray" size={24} /></div>
                 </div>
-                <div className='p-14'>
+                <div className='pt-9 p-14'>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >Complete name</h2>
-                    <input name='complete_name' onChange={(e) => handleSignupSchema(e)} value={signupSchema.complete_name} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
+                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Complete name</h2>
+                    <input name='complete_name' onChange={(e) => handleSignupSchema(e)} value={signupSchema.complete_name} style={{ fontSize: 16 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
                   </div>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >E-mail</h2>
-                    <input name='email' onChange={(e) => handleSignupSchema(e)} value={signupSchema.email} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
+                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >E-mail</h2>
+                    <input name='email' onChange={(e) => handleSignupSchema(e)} value={signupSchema.email} style={{ fontSize: 16 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
                   </div>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >Password</h2>
-                    <input name='password' onChange={(e) => handleSignupSchema(e)} value={signupSchema.password} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="password" />
+                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Password</h2>
+                    <input name='password' onChange={(e) => handleSignupSchema(e)} value={signupSchema.password} style={{ fontSize: 16 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="password" />
                   </div>
                   <div>
-                    <h2 style={{ fontSize: 18.4 }} className="pb-1 font-medium font-noto" >First url</h2>
-                    <input name='first_url' onChange={(e) => handleSignupSchema(e)} value={signupSchema.first_url} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
+                    <h2 style={{ fontSize: 16.4 }} className="pb-1 font-medium font-noto" >First url</h2>
+                    <input name='first_url' onChange={(e) => handleSignupSchema(e)} value={signupSchema.first_url} style={{ fontSize: 16 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
                   </div>
-                  <div  className="justify-between flex pt-14">
+                  <div  className="justify-between flex pt-9">
                     <div></div>
-                    <button onClick={() => console.log(signupSchema)} className="font-medium text-xl font-noto text-[white] rounded-2xl bg-[#404727] pb-5 pt-4 pr-7 pl-7" >Next</button>
+                    <button style={{ fontSize: 16 }} className="font-medium font-noto text-[white] rounded-2xl bg-[#404727] pb-4 pt-4 pr-7 pl-7" >Next</button>
                   </div>
                 </div>
               </div>

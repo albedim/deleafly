@@ -35,16 +35,16 @@ const SigninModal: React.FC<SigninmodalProps> = ({ visible, onClose }) => {
                 </div>
                 <div className='pt-4 pl-14 pr-14 pb-14'>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >E-mail</h2>
-                    <input name='email' onChange={(e) => handleSigninSchema(e)} value={signinSchema.email} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
+                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >E-mail</h2>
+                    <input name='email' onChange={(e) => handleSigninSchema(e)} value={signinSchema.email} style={{ fontSize: 16 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="text" />
                   </div>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 18.4 }} className="pb-2 font-medium font-noto" >Password</h2>
-                    <input name='password' onChange={(e) => handleSigninSchema(e)} value={signinSchema.password} style={{ fontSize: 18 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="password" />
+                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Password</h2>
+                    <input name='password' onChange={(e) => handleSigninSchema(e)} value={signinSchema.password} style={{ fontSize: 16 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-4 pl-4" type="password" />
                   </div>
                   <div  className="justify-between flex pt-4">
                     <div></div>
-                    <button onClick={() => console.log(signinSchema)} className="font-medium text-xl font-noto text-[white] rounded-2xl bg-[#404727] pb-5 pt-4 pr-7 pl-7" >Login</button>
+                    <button style={{ fontSize: 16 }} className="font-medium font-noto text-[white] rounded-2xl bg-[#404727] pb-4 pt-4 pr-7 pl-7" >Login</button>
                   </div>
                 </div>
               </div>
