@@ -7,6 +7,7 @@ import GetStarted from './components/get_started/GetStarted';
 import AboutUs from './components/about_us/AboutUs';
 import Footer from './components/footer/Footer';
 import Dashboard from './components/dashboard/Dashboard';
+import Stats from './components/stats/Stats';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<><Header route_name="get_started" /><GetStarted/></>} />
-        <Route path="/:shorted_url/stats" element={<><Header route_name="get_started" /><GetStarted/></>} />
+        <Route path="/:shorted_url/stats" element={<><Header route_name="get_started" /><Stats/></>} />
         <Route path="/:shorted_url" element={<></>} />
         <Route path="/about" element={<><Header route_name="about_us" /><AboutUs/><Footer/></>} />
         <Route path="/dashboard" element={<><Header route_name="dashboard" /><Dashboard/></>} />

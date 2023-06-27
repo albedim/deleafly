@@ -25,7 +25,7 @@ const Dashboard = () => {
   }, [])
 
   const getUrls = async () => {
-    await axios.get(BASE_URL + "/url/get/" + jwtDecode<any>(token).sub.user_id)
+    await axios.get(BASE_URL + "/url/get/of/" + jwtDecode<any>(token).sub.user_id)
       .then(response => {
         setUrls(response.data.param.urls)
         setMaxUrls(response.data.param.max_urls)

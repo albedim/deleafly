@@ -6,9 +6,6 @@ import { Line, Pie } from 'react-chartjs-2';
 import { ArcElement, CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto';
 
-Chart.register(CategoryScale, ArcElement);
-
-
 
 const GetStarted = () => {
 
