@@ -84,7 +84,7 @@ const Stats = () => {
           )
         ) : (
           <div>
-            <select value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
+            <select defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
               <option value=""></option>
               <option value="monthly">Monthly</option>
               <option value="weekly">Weekly</option>

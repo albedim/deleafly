@@ -8,6 +8,7 @@ import AboutUs from './components/about_us/AboutUs';
 import Footer from './components/footer/Footer';
 import Dashboard from './components/dashboard/Dashboard';
 import Stats from './components/stats/Stats';
+import ShortedUrl from './components/shorted_url/ShortedUrl';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<><Header route_name="get_started" /><GetStarted/></>} />
         <Route path="/:shorted_url/stats" element={<><Header route_name="get_started" /><Stats/></>} />
-        <Route path="/:shorted_url" element={<></>} />
+        <Route path="/:shorted_url" element={<><ShortedUrl/></>} />
         <Route path="/about" element={<><Header route_name="about_us" /><AboutUs/><Footer/></>} />
         <Route path="/dashboard" element={<><Header route_name="dashboard" /><Dashboard/></>} />
       </Routes>
