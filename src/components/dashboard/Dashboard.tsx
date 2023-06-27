@@ -87,13 +87,13 @@ const Dashboard = () => {
                       <div className='items-center justify-around flex'>
                         <div>
                           <h2 style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" >{url.name}</h2>
-                          <a target='_blank' href={`https://sturl-web.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
+                          <a target='_blank' href={`http://localhost:3000/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
                         </div>
                       </div>
                       <div className='pl-24 items-center justify-around flex'>
                         <div className='flex'>
-                          <div className='p-4'><ImStatsDots onClick={() => navigate(`/${url.shorted_url}/stats`)} color='#404727' size={24} /></div>
-                          <div className='p-4'><MdDelete onClick={() => removeUrl(url.url_id)} color='#404727' size={28} /></div>
+                          <div className='p-4'><ImStatsDots className="cursor-pointer" onClick={() => navigate(`/${url.shorted_url}/stats`)} color='#404727' size={24} /></div>
+                          <div className='p-4'><MdDelete className='cursor-pointer' onClick={() => removeUrl(url.url_id)} color='#404727' size={28} /></div>
                         </div>
                       </div>
                     </div>

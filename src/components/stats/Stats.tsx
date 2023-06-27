@@ -58,7 +58,7 @@ const Stats = () => {
     await axios.get(BASE_URL + "/url/get/" + url, { headers: {"Authorization" : `Bearer ${token}`} })
       .then(response => {
         setShortedUrl(response.data.param)
-        getViews(response.data.url_id, mode)
+        getViews(response.data.param.url_id, mode)
       })
       .catch(error => navigate("/"))
   }
