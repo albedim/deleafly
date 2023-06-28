@@ -1,4 +1,5 @@
 import { FaBullseye, FaSadTear, FaShareAlt } from 'react-icons/fa'
+import { PiPencilSimpleLineFill } from 'react-icons/pi'
 import { IoIosAddCircle } from 'react-icons/io'
 import { MdDelete } from 'react-icons/md'
 import { ImStatsDots } from 'react-icons/im'
@@ -8,10 +9,13 @@ import axios from 'axios'
 import { BASE_URL } from '../../utils'
 import jwtDecode from 'jwt-decode'
 import { SpinnerDotted } from 'spinners-react/lib/esm/SpinnerDotted'
+import { IoClose, IoSave } from 'react-icons/io5'
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
+  const [inEditingUrl, setInEditingUrl] = useState<any>("")
+  const [inEditing, setInEditing] = useState(false)
   const [occuredError, setOccuredError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [maxUrls, setMaxUrls] = useState(0)
@@ -31,7 +35,7 @@ const Dashboard = () => {
         setMaxUrls(response.data.param.max_urls)
       })
       .catch(error => setOccuredError(true))
-      setIsLoading(false)
+    setIsLoading(false)
   }
 
   const removeUrl = async (urlId: number) => {
@@ -39,6 +43,14 @@ const Dashboard = () => {
       .then(response => {
         setUrls(response.data.param.urls)
         setMaxUrls(response.data.param.max_urls)
+      })
+      .catch(error => console.log(error))
+  }
+
+  const editUrl = async (urlId: any) => {
+    await axios.put(BASE_URL + "/url/change/" + urlId + "?name=" + inEditingUrl, {}, { headers: { "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4Nzg3NDk0NiwianRpIjoiN2E5ZmRlYWQtNWUxZS00NmVkLTlkZDItNjBmMGIwYWI3ODNjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjo4LCJjb21wbGV0ZV9uYW1lIjoiQWxiZXJ0byBEaSBhaW8iLCJlbWFpbCI6ImEiLCJjcmVhdGVkX29uIjoiU2F0LCAyNCBKdW4gMjAyMyAwMDowMDowMCBHTVQifSwibmJmIjoxNjg3ODc0OTQ2LCJleHAiOjE2OTAyOTQxNDZ9.sXRsitmuLVmqbsnJ1l1A1SYK4pvTpyCDx965Bl_Opy8` } })
+      .then(response => {
+        setUrls(response.data.param.urls)
       })
       .catch(error => console.log(error))
   }
@@ -54,7 +66,7 @@ const Dashboard = () => {
                 <h2 style={{ fontSize: 24 }} className="text-[#404727] font-extrabold font-noto">Loading...</h2>
               </div>
             </div>
-          ):( 
+          ) : (
             <div className='mt-24 items-center justify-around flex w-screen' >
               <div>
                 <div className='p-8 items-center justify-around flex' ><FaSadTear size={54} color='#ccd0af' /></div>
@@ -78,19 +90,41 @@ const Dashboard = () => {
               {
                 urls.map(url => (
                   <div className='pt-4 pb-4 p-14'>
-                    <div className="rounded-xl justify-between flex shadow-md bg-[white] p-4">
-                      <div className='flex'>
+                    <div className="rounded-xl justify-between flex-block shadow-md bg-[white] p-6">
+                      <div className='justify-around flex'>
                         <div className='items-center justify-around flex p-8'>
                           <FaShareAlt color='#404727' size={24} />
                         </div>
                       </div>
                       <div className='items-center justify-around flex'>
                         <div>
-                          <h2 style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" >{url.name}</h2>
-                          <a target='_blank' href={`http://localhost:3000/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
+                          <div className='items-center flex'>
+                            {
+                              inEditing ? (
+                                inEditingUrl.length > 0 && inEditingUrl != url.name ? (
+                                  <>
+                                    <input autoFocus onChange={(e) => setInEditingUrl(e.target.value)} value={inEditingUrl} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
+                                    <div className='pl-3' ><IoSave size={24} color='gray' onClick={() => { setInEditing(false); editUrl(url.url_id) }} /></div>
+                                  </>
+                                ) : (
+                                  <>
+                                    <input autoFocus onChange={(e) => setInEditingUrl(e.target.value)} value={inEditingUrl} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
+                                    <div className='pl-3' ><IoClose size={24} color='gray' onClick={() => { setInEditing(false) }} /></div>
+                                  </>
+                                )
+                              ) : (
+                                <>
+                                  <h2 style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" >{url.name}</h2>
+                                  <div className='pl-4'><PiPencilSimpleLineFill size={24} color='gray' onClick={() => { setInEditing(true); setInEditingUrl(url.name) }} /></div>
+                                </>
+                              )
+                            }
+                          </div>
+                          <a target='_blank' href={`http://sturl-web.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
                         </div>
                       </div>
-                      <div className='pl-24 items-center justify-around flex'>
+                      <div className='none-block h-10' ></div>
+                      <div className='flex no-padding pl-24 items-center justify-around'>
                         <div className='flex'>
                           <div className='p-4'><ImStatsDots className="cursor-pointer" onClick={() => navigate(`/${url.shorted_url}/stats`)} color='#404727' size={24} /></div>
                           <div className='p-4'><MdDelete className='cursor-pointer' onClick={() => removeUrl(url.url_id)} color='#404727' size={28} /></div>

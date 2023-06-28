@@ -18,6 +18,10 @@
   display: block;
 }
 
+.no-padding{
+  
+}
+
 @media screen and (max-width: 1314px) {
   .flex-none{
     display: none;
@@ -33,5 +37,8 @@
   }
   .block-flex{
     display: flex;
+  }
+  .no-padding{
+    padding: 0;
   }
 }
