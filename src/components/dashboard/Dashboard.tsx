@@ -48,7 +48,7 @@ const Dashboard = () => {
   }
 
   const editUrl = async (urlId: any) => {
-    await axios.put(BASE_URL + "/url/change/" + urlId + "?name=" + inEditingUrl, {}, { headers: { "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4Nzg3NDk0NiwianRpIjoiN2E5ZmRlYWQtNWUxZS00NmVkLTlkZDItNjBmMGIwYWI3ODNjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjo4LCJjb21wbGV0ZV9uYW1lIjoiQWxiZXJ0byBEaSBhaW8iLCJlbWFpbCI6ImEiLCJjcmVhdGVkX29uIjoiU2F0LCAyNCBKdW4gMjAyMyAwMDowMDowMCBHTVQifSwibmJmIjoxNjg3ODc0OTQ2LCJleHAiOjE2OTAyOTQxNDZ9.sXRsitmuLVmqbsnJ1l1A1SYK4pvTpyCDx965Bl_Opy8` } })
+    await axios.put(BASE_URL + "/url/change/" + urlId + "?name=" + inEditingUrl, {}, { headers: { "Authorization": `Bearer ${token}` } })
       .then(response => {
         setUrls(response.data.param.urls)
       })
