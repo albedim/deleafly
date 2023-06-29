@@ -106,10 +106,10 @@ const Dashboard = () => {
                                 </div>
                                 <div className='items-center justify-around flex p-4'>
                                   <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
-                                    <input className='bg-[#fafafa]' value={"sturl-web.pages.dev/" + url.shorted_url.substring(0,2) + "..."} disabled type="text"></input>
+                                    <input className='bg-[#fafafa]' value={"sturl.pages.dev/" + url.shorted_url.substring(0,2) + "..."} disabled type="text"></input>
                                     <div id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
                                       <IoCopy onClick={() => {
-                                        navigator.clipboard.writeText("https://sturl-web.pages.dev/" + url.shorted_url); 
+                                        navigator.clipboard.writeText("https://sturl.pages.dev/" + url.shorted_url); 
                                         const d: any = document.querySelector("#copy"); 
                                         d.style.transition = "0.7s"; 
                                         d.style.backgroundColor = '#9fdb8f'; 
@@ -148,7 +148,7 @@ const Dashboard = () => {
                               )
                             }
                           </div>
-                          <a target='_blank' href={`http://sturl-web.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
+                          <a target='_blank' href={`http://sturl.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
                         </div>
                       </div>
                       <div className='none-block h-10' ></div>
