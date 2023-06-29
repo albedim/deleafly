@@ -44,6 +44,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ first_url, visible, onClose }
     .then(response => {
       window.localStorage.setItem("token", response.data.param.token)
       navigate("/dashboard")
+      onClose()
     })
     .catch(error => setError(error.response.data.error))
   }

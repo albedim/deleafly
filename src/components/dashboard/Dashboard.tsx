@@ -9,11 +9,13 @@ import axios from 'axios'
 import { BASE_URL } from '../../utils'
 import jwtDecode from 'jwt-decode'
 import { SpinnerDotted } from 'spinners-react/lib/esm/SpinnerDotted'
-import { IoClose, IoSave } from 'react-icons/io5'
+import { IoClose, IoCopy, IoSave } from 'react-icons/io5'
+import Modal from '../modal/Modal'
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
+  const [modalOptions, setModalOptions] = useState({ body: <div></div>, visible: false })
   const [inEditingUrl, setInEditingUrl] = useState<any>("")
   const [inEditing, setInEditing] = useState(false)
   const [occuredError, setOccuredError] = useState(false)
@@ -57,6 +59,7 @@ const Dashboard = () => {
 
   return (
     <div className="items-center justify-around w-screen flex">
+      <Modal body={modalOptions.body} onClose={() => setModalOptions({ body: <div></div>, visible: false })} visible={modalOptions.visible} />
       {
         isLoading || occuredError ? (
           isLoading ? (
@@ -90,10 +93,35 @@ const Dashboard = () => {
               {
                 urls.map(url => (
                   <div className='pt-4 pb-4 p-14'>
-                    <div className="rounded-xl justify-between flex-block shadow-md bg-[white] p-6">
+                    <div className="bg-[#fcfcfc] rounded-xl justify-between flex-block shadow-md p-6">
                       <div className='justify-around flex'>
                         <div className='items-center justify-around flex p-8'>
-                          <FaShareAlt color='#404727' size={24} />
+                          <FaShareAlt onClick={() => setModalOptions({
+                            visible: true,
+                            body: 
+                              <div className='p-4'>
+                                <div className='pl-6'>
+                                  <h2 style={{ width: 284, fontSize: 16 }} className="text-[#404727] font-bold font-noto" >
+                                    Copy the url and share it to see its traffic.</h2>
+                                </div>
+                                <div className='items-center justify-around flex p-4'>
+                                  <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
+                                    <input className='bg-[#fafafa]' value={"sturl-web.pages.dev/" + url.shorted_url.substring(0,2) + "..."} disabled type="text"></input>
+                                    <div id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
+                                      <IoCopy onClick={() => {
+                                        navigator.clipboard.writeText("https://sturl-web.pages.dev/" + url.shorted_url); 
+                                        const d: any = document.querySelector("#copy"); 
+                                        d.style.transition = "0.7s"; 
+                                        d.style.backgroundColor = '#9fdb8f'; 
+                                        setTimeout(() => {
+                                          d.style.backgroundColor = '#ccd0af'
+                                        }, 1800)
+                                      }} color='white'/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          })} color='#404727' size={24} />
                         </div>
                       </div>
                       <div className='items-center justify-around flex'>

@@ -43,7 +43,7 @@ const Stats = () => {
       .then(response => {
         setViews({
           label: response.data.param.views_chart.label,
-          value: response.data.param.views_chart.value
+          value: mode != 'daily' ? sortWeekdaysOrMonths(response.data.param.views_chart.value) : response.data.param.views_chart.value
         })
         setCountryViews({
           labels: response.data.param.countries_chart.labels,
@@ -56,6 +56,26 @@ const Stats = () => {
       })
       .catch(error => setOccuredError(true))
     setIsLoading(false)
+  }
+
+  function sortWeekdaysOrMonths(jsonData: any) {
+    const sortedData = Object.entries(jsonData)
+      .sort(([keyA, valueA], [keyB, valueB]) => {
+        const order = isWeekDay(jsonData) ? ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] : ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+        return order.indexOf(keyA.toLowerCase()) - order.indexOf(keyB.toLowerCase());
+      })
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
+    return sortedData
+  }
+
+  function isWeekDay(jsonData: any) {
+    const data = jsonData
+    const firstKey = Object.keys(data)[0];
+
+    const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
+    return weekdays.includes(firstKey.toLowerCase())
   }
 
   const getUrl = async () => {
@@ -95,7 +115,7 @@ const Stats = () => {
               <option value="daily">Daily</option>
             </select>
             <div className='flex-block'>
-              <div className='rounded-2xl p-8 shadow-lg'>
+              <div className='bg-[#fcfcfc] rounded-2xl p-8 shadow-lg'>
                 <div className='p-4'>
                   <h2 style={{ maxWidth: 340, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].views}: {views.label}</h2>
                 </div>
@@ -127,53 +147,65 @@ const Stats = () => {
                   }}
                 />
               </div>
-              <div className='flex-block'>
+              <div className='p-8 flex-block'>
                 <div className='p-8'>
-                  <div className='rounded-2xl p-8 shadow-lg'>
+                  <div className='bg-[#fcfcfc] rounded-2xl p-8 shadow-lg'>
                     <div className='p-4'>
-                      <h2 style={{ maxWidth: 340, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].country}</h2>
+                      <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].country}</h2>
                     </div>
-                    <Pie style={{ display: 'block', height: -140, width: 280 }} data={{
-                      labels: countryViews.labels,
-                      datasets: [
-                        {
-                          label: 'people saw the website',
-                          data: countryViews.values,
-                          backgroundColor: [
-                            '#404727',
-                            '#5E6839',
-                            '#473E27',
-                            '#304727',
-                            '#93A45A'
+                    {
+                      countryViews.labels.length > 0 ? (
+                        <Pie style={{ display: 'block', height: -140, width: 280 }} data={{
+                          labels: platformChart.labels,
+                          datasets: [
+                            {
+                              label: 'people saw the website',
+                              data: platformChart.values,
+                              backgroundColor: [
+                                '#404727',
+                                '#5E6839',
+                                '#473E27',
+                                '#304727',
+                                '#93A45A'
+                              ],
+                              borderWidth: 1,
+                            },
                           ],
-                          borderWidth: 1,
-                        },
-                      ],
-                    }} />
+                        }} />
+                      ) : (
+                        <img width={340} src={require("../../images/not_found.png")} alt="" />
+                      )
+                    }
                   </div>
                 </div>
                 <div className='p-8'>
-                  <div className='rounded-2xl p-8 shadow-lg'>
+                  <div className='bg-[#fcfcfc] rounded-2xl p-8 shadow-lg'>
                     <div className='p-4'>
-                      <h2 style={{ maxWidth: 340, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].platform}</h2>
+                      <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].platform}</h2>
                     </div>
-                    <Pie style={{ display: 'block', height: -140, width: 280 }} data={{
-                      labels: platformChart.labels,
-                      datasets: [
-                        {
-                          label: 'people saw the website',
-                          data: platformChart.values,
-                          backgroundColor: [
-                            '#404727',
-                            '#5E6839',
-                            '#473E27',
-                            '#304727',
-                            '#93A45A'
+                    {
+                      platformChart.labels.length > 0 ? (
+                        <Pie style={{ display: 'block', height: -140, width: 280 }} data={{
+                          labels: platformChart.labels,
+                          datasets: [
+                            {
+                              label: 'people saw the website',
+                              data: platformChart.values,
+                              backgroundColor: [
+                                '#404727',
+                                '#5E6839',
+                                '#473E27',
+                                '#304727',
+                                '#93A45A'
+                              ],
+                              borderWidth: 1,
+                            },
                           ],
-                          borderWidth: 1,
-                        },
-                      ],
-                    }} />
+                        }} />
+                      ) : (
+                        <img width={340} src={require("../../images/not_found.png")} alt="" />
+                      )
+                    }
                   </div>
                 </div>
               </div>

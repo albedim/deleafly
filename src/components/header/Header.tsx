@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import SigninModal from "../modal/SigninModal";
 import { useState } from "react";
 import jwtDecode from "jwt-decode";
+import UserMenu from "./UserMenu";
 
 interface HeaderProps {
   route_name: String
@@ -31,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({
         <div className="items-center flex">
           {
             token != null ?
-              <img style={{ width: 28 }} src={"https://api.dicebear.com/6.x/big-ears-neutral/svg?seed=AAAAAAAA&radius=20&backgroundColor=da9969,f8b788"} alt="" />
+              <UserMenu token={token}/>
               : <IoLogIn onClick={() => setModalOptions({ visible: true })} color="#404727" size={30} />
           }
         </div>

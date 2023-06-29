@@ -31,6 +31,7 @@ const SigninModal: React.FC<SigninmodalProps> = ({ visible, onClose }) => {
     await axios.post(BASE_URL + "/user/signin", signinSchema)
     .then(response => {
       window.localStorage.setItem("token", response.data.param.token)
+      onClose()
       navigate("/dashboard")
     })
     .catch(error => setError(error.response.data.error))
