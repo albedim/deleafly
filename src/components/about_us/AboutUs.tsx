@@ -10,10 +10,10 @@ const AboutUs = () => {
         <div>
           <div className="p-14">
             <h2 style={{ maxWidth: 514, fontSize: 34 }} className="text-[#07242b] font-extrabold font-noto" >What is Sturl?</h2>
-            <h2 style={{ maxWidth: 514, fontSize: 18 }} className="pt-3 text-[#07242b] font-medium font-noto" >Sturl is your life saver if you need to track the trafic on your webistes or url's. You'll be able to see how many people watch your url's daily, weekly and monthly.You'll also be able to see where they come from and how many times your url's are watched from the same people</h2>
+            <h2 style={{ maxWidth: 514, fontSize: 18 }} className="pt-3 text-[#07242b] font-medium font-noto" >Sturl is your life saver if you need to track the traffic on your webistes or urls. You'll be able to see how many people watch your urls daily, weekly and monthly. You'll also be able to see where they come from and the devices they use</h2>
           </div>
           <div className="p-14">
-            <h2 style={{ maxWidth: 514, fontSize: 34 }} className="text-[#07242b] font-extrabold font-noto" >How can I track an url?</h2>
+            <h2 style={{ maxWidth: 514, fontSize: 34 }} className="text-[#07242b] font-extrabold font-noto" >How can I track my urls?</h2>
             <h2 style={{ maxWidth: 514, fontSize: 18 }} className="pt-3 text-[#07242b] font-medium font-noto" >You can track any kind of website/url. You just need to go to your <span style={{ textDecorationColor: '#ccd0af', textDecoration: 'underline' }} onClick={() => navigate("/dashboard")} >dashboard</span> and create a new URL, Sturl is going to create a shorted one that you can share to people and track whenever you want</h2>
           </div>
         </div>

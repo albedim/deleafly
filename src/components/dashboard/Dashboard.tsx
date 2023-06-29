@@ -11,12 +11,17 @@ import jwtDecode from 'jwt-decode'
 import { SpinnerDotted } from 'spinners-react/lib/esm/SpinnerDotted'
 import { IoClose, IoCopy, IoSave } from 'react-icons/io5'
 import Modal from '../modal/Modal'
+import CreateUrlModal from '../modal/CreateUrlModal'
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
+  const [createUrlModalOptions, setCreateUrlModalOptions] = useState({ visible: false })
   const [modalOptions, setModalOptions] = useState({ body: <div></div>, visible: false })
-  const [inEditingUrl, setInEditingUrl] = useState<any>("")
+  const [inEditingUrl, setInEditingUrl] = useState<any>({
+    url_id: 0,
+    name: ''
+  })
   const [inEditing, setInEditing] = useState(false)
   const [occuredError, setOccuredError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -49,8 +54,8 @@ const Dashboard = () => {
       .catch(error => console.log(error))
   }
 
-  const editUrl = async (urlId: any) => {
-    await axios.put(BASE_URL + "/url/change/" + urlId + "?name=" + inEditingUrl, {}, { headers: { "Authorization": `Bearer ${token}` } })
+  const editUrl = async () => {
+    await axios.put(BASE_URL + "/url/change/" + inEditingUrl.url_id + "?name=" + inEditingUrl.name, {}, { headers: { "Authorization": `Bearer ${token}` } })
       .then(response => {
         setUrls(response.data.param.urls)
       })
@@ -59,6 +64,7 @@ const Dashboard = () => {
 
   return (
     <div className="items-center justify-around w-screen flex">
+      <CreateUrlModal setUrls={() => getUrls()} onClose={() => setCreateUrlModalOptions({ visible: false })} visible={createUrlModalOptions.visible} />
       <Modal body={modalOptions.body} onClose={() => setModalOptions({ body: <div></div>, visible: false })} visible={modalOptions.visible} />
       {
         isLoading || occuredError ? (
@@ -85,18 +91,18 @@ const Dashboard = () => {
                 <h2 style={{ fontSize: 24 }} className="text-[#ccd0af] font-extrabold font-noto" >{urls.length}/{maxUrls}</h2>
                 {
                   urls.length > 2 &&
-                  <div className='items-center justify-around flex pl-2' ><IoIosAddCircle size={24} color='#404727' /></div>
+                  <div className='items-center justify-around flex pl-2' ><IoIosAddCircle className='cursor-pointer' onClick={() => setCreateUrlModalOptions({ visible: true })} size={24} color='#404727' /></div>
                 }
               </div>
             </div>
-            <div>
+            <div style={{ marginTop: 24, overflowY: 'scroll', maxHeight: 584 }} >
               {
                 urls.map(url => (
                   <div className='pt-4 pb-4 p-14'>
                     <div className="bg-[#fcfcfc] rounded-xl justify-between flex-block shadow-md p-6">
                       <div className='justify-around flex'>
                         <div className='items-center justify-around flex p-8'>
-                          <FaShareAlt onClick={() => setModalOptions({
+                          <FaShareAlt className='cursor-pointer' onClick={() => setModalOptions({
                             visible: true,
                             body: 
                               <div className='p-4'>
@@ -106,9 +112,8 @@ const Dashboard = () => {
                                 </div>
                                 <div className='items-center justify-around flex p-4'>
                                   <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
-                                    <input className='bg-[#fafafa]' value={"sturl.pages.dev/" + url.shorted_url.substring(0,2) + "..."} disabled type="text"></input>
-                                    <div id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
-                                      <IoCopy onClick={() => {
+                                    <input className='bg-[#fafafa]' value={"sturl.pages.dev/" + url.shorted_url} disabled type="text"></input>
+                                    <div onClick={() => {
                                         navigator.clipboard.writeText("https://sturl.pages.dev/" + url.shorted_url); 
                                         const d: any = document.querySelector("#copy"); 
                                         d.style.transition = "0.7s"; 
@@ -116,7 +121,8 @@ const Dashboard = () => {
                                         setTimeout(() => {
                                           d.style.backgroundColor = '#ccd0af'
                                         }, 1800)
-                                      }} color='white'/>
+                                      }} id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
+                                      <IoCopy color='white'/>
                                     </div>
                                   </div>
                                 </div>
@@ -128,22 +134,22 @@ const Dashboard = () => {
                         <div>
                           <div className='items-center flex'>
                             {
-                              inEditing ? (
-                                inEditingUrl.length > 0 && inEditingUrl != url.name ? (
+                              inEditingUrl.url_id == url.url_id ? (
+                                inEditingUrl.name.length > 0 && inEditingUrl.name != url.name ? (
                                   <>
-                                    <input autoFocus onChange={(e) => setInEditingUrl(e.target.value)} value={inEditingUrl} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
-                                    <div className='pl-3' ><IoSave size={24} color='gray' onClick={() => { setInEditing(false); editUrl(url.url_id) }} /></div>
+                                    <input autoFocus onChange={(e) => setInEditingUrl({ url_id: url.url_id, name: e.target.value })} value={inEditingUrl.name} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
+                                    <div className='pl-3' ><IoSave className='cursor-pointer' size={24} color='gray' onClick={() => { setInEditingUrl({ url_id: 0, name: ''}); editUrl()}} /></div>
                                   </>
                                 ) : (
                                   <>
-                                    <input autoFocus onChange={(e) => setInEditingUrl(e.target.value)} value={inEditingUrl} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
-                                    <div className='pl-3' ><IoClose size={24} color='gray' onClick={() => { setInEditing(false) }} /></div>
+                                    <input autoFocus onChange={(e) => setInEditingUrl({ url_id: url.url_id, name: e.target.value})} value={inEditingUrl.name} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
+                                    <div className='pl-3' ><IoClose className="cursor-pointer" size={24} color='gray' onClick={() => { setInEditingUrl({ url_id: 0, name: ''})}} /></div>
                                   </>
                                 )
                               ) : (
                                 <>
                                   <h2 style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" >{url.name}</h2>
-                                  <div className='pl-4'><PiPencilSimpleLineFill size={24} color='gray' onClick={() => { setInEditing(true); setInEditingUrl(url.name) }} /></div>
+                                  <div className='pl-4'><PiPencilSimpleLineFill className="cursor-pointer" size={24} color='gray' onClick={() => { setInEditingUrl({ url_id: url.url_id, name: url.name })}} /></div>
                                 </>
                               )
                             }
@@ -166,7 +172,7 @@ const Dashboard = () => {
             <div className="p-8 items-center justify-around flex">
               {
                 urls.length < 3 &&
-                <button className="font-lg font-noto text-[white] rounded-2xl bg-[#404727] pb-5 pt-5 pr-8 pl-8" >Create</button>
+                <button onClick={() => setCreateUrlModalOptions({ visible: true })} className="font-lg font-noto text-[white] rounded-2xl bg-[#404727] pb-5 pt-5 pr-8 pl-8" >Create</button>
               }
             </div>
           </div>

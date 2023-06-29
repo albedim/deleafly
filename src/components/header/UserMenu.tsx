@@ -2,6 +2,7 @@ import { Button, Menu, MenuItem } from "@mui/joy";
 import jwtDecode from "jwt-decode";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AccountModal from "../modal/AcountModal";
 
 interface UserMenuProps{
   token: any
@@ -11,6 +12,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
   token
 }) => {
 
+  const [accountModalOptions, setAccountModalOptions] = useState({ visible: false })
   const [anchorEl, setAnchorEl] = useState(null);
   const user: any = jwtDecode(token)
   const open = Boolean(anchorEl);
@@ -26,6 +28,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
   return (
     <div className='align-center space-around display-flex border-radius-5'>
+      <AccountModal onClose={() => setAccountModalOptions({ visible: false })} visible={accountModalOptions.visible} />
       <Button
         id="basic-demo-button"
         style={{ backgroundColor: "transparent" }}
@@ -36,7 +39,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
       >
         <div className='pr-8 flex'>
           <div className='items-center justify-around flex'>
-            <img style={{ width: 28 }} src={"https://api.dicebear.com/6.x/big-ears-neutral/svg?seed=&radius=20&backgroundColor=da9969,f8b788"} alt="" />
+            <img style={{ width: 28 }} src={"https://api.dicebear.com/6.x/big-ears-neutral/svg?seed="+user.sub.complete_name.replace(" ", "")+"&radius=20&backgroundColor=da9969,f8b788"} alt="" />
           </div>
         </div>
       </Button>
@@ -51,7 +54,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         <MenuItem
           style={{ paddingRight: 14, paddingLeft: 14 }}
           className="justify-around flex"
-          onClick={() => { navigate("/dashboard"); handleClose() }}>
+          onClick={() => { setAccountModalOptions({ visible: true }); handleClose() }}>
           <div className="items-center justify-around flex" style={{ paddingTop: 8, paddingBottom: 8, paddingRight: 54, paddingLeft: 54 }}>
             <div className="justify-around flex"><h2 style={{ fontSize: 14, fontWeight: 400, fontFamily: 'Noto Sans JP' }}>Account</h2></div>
           </div>
