@@ -36,6 +36,7 @@ const Stats = () => {
       getUrl()
     }
   }, [])
+  
 
   const getViews = async (urlId: number, mode: string) => {
     setIsLoading(true)
