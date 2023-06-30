@@ -12,10 +12,12 @@ import { SpinnerDotted } from 'spinners-react/lib/esm/SpinnerDotted'
 import { IoClose, IoCopy, IoSave } from 'react-icons/io5'
 import Modal from '../modal/Modal'
 import CreateUrlModal from '../modal/CreateUrlModal'
+import { BiSolidLeftArrowCircle, BiSolidRightArrowCircle } from 'react-icons/bi'
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
+  const [currentPage, setCurrentPage] = useState(0)
   const [createUrlModalOptions, setCreateUrlModalOptions] = useState({ visible: false })
   const [modalOptions, setModalOptions] = useState({ body: <div></div>, visible: false })
   const [inEditingUrl, setInEditingUrl] = useState<any>({
@@ -26,7 +28,7 @@ const Dashboard = () => {
   const [occuredError, setOccuredError] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [maxUrls, setMaxUrls] = useState(0)
-  const [urls, setUrls] = useState<any[]>([])
+  const [urls, setUrls] = useState<any[][]>([])
   const token: any = window.localStorage.getItem("token")
 
   useEffect(() => {
@@ -62,6 +64,12 @@ const Dashboard = () => {
       .catch(error => console.log(error))
   }
 
+  const getUrlsQuantity = () => {
+    var counter = 0
+    urls.forEach(page => counter += page.length)
+    return counter
+  }
+
   return (
     <div className="items-center justify-around w-screen flex">
       <CreateUrlModal setUrls={() => getUrls()} onClose={() => setCreateUrlModalOptions({ visible: false })} visible={createUrlModalOptions.visible} />
@@ -88,16 +96,13 @@ const Dashboard = () => {
             <div className="pb-4 p-14 justify-between flex">
               <h2 style={{ fontSize: 24 }} className="text-[#404727] font-extrabold font-noto" >Your url's</h2>
               <div className='flex'>
-                <h2 style={{ fontSize: 24 }} className="text-[#ccd0af] font-extrabold font-noto" >{urls.length}/{maxUrls}</h2>
-                {
-                  urls.length > 2 &&
-                  <div className='items-center justify-around flex pl-2' ><IoIosAddCircle className='cursor-pointer' onClick={() => setCreateUrlModalOptions({ visible: true })} size={24} color='#404727' /></div>
-                }
+                <h2 style={{ fontSize: 24 }} className="text-[#ccd0af] font-extrabold font-noto" >{getUrlsQuantity()}/{maxUrls}</h2>
+                <div className='items-center justify-around flex pl-2' ><IoIosAddCircle className='cursor-pointer' onClick={() => setCreateUrlModalOptions({ visible: true })} size={28} color='#404727' /></div>
               </div>
             </div>
-            <div style={{ marginTop: 24, overflowY: 'scroll', maxHeight: 584 }} >
+            <div style={{ marginTop: 24}} >
               {
-                urls.map(url => (
+                urls[currentPage].map(url => (
                   <div className='pt-4 pb-4 p-14'>
                     <div className="bg-[#fcfcfc] rounded-xl justify-between flex-block shadow-md p-6">
                       <div className='justify-around flex'>
@@ -153,14 +158,18 @@ const Dashboard = () => {
                               )
                             }
                           </div>
-                          <a target='_blank' href={`http://deleafly.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
+                          <a target='_blank' href={`http://deleafly.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >deleafly.pages.dev/{url.shorted_url}</h2></a>
                         </div>
                       </div>
                       <div className='none-block h-10' ></div>
                       <div className='flex no-padding pl-24 items-center justify-around'>
                         <div className='flex'>
                           <div className='p-4'><ImStatsDots className="cursor-pointer" onClick={() => navigate(`/${url.shorted_url}/stats`)} color='#404727' size={24} /></div>
-                          <div className='p-4'><MdDelete className='cursor-pointer' onClick={() => removeUrl(url.url_id)} color='#404727' size={28} /></div>
+                          <div className='p-4'><MdDelete className='cursor-pointer' onClick={() => {
+                            removeUrl(url.url_id)
+                            if(urls[currentPage].length == 1)
+                              setCurrentPage(currentPage-1)
+                           }} color='#404727' size={28} /></div>
                         </div>
                       </div>
                     </div>
@@ -168,11 +177,14 @@ const Dashboard = () => {
                 ))
               }
             </div>
-            <div className="p-8 items-center justify-around flex">
-              {
-                urls.length < 3 &&
-                <button onClick={() => setCreateUrlModalOptions({ visible: true })} className="font-lg font-noto text-[white] rounded-2xl bg-[#404727] pb-5 pt-5 pr-8 pl-8" >Create</button>
-              }
+            <div className='justify-around flex p-14'>
+              <div className='items-center flex'>
+                <BiSolidLeftArrowCircle opacity={currentPage == 0 ? "40%" : "100%"} className='cursor-pointer' onClick={() => currentPage == 0 ? {} : setCurrentPage(currentPage-1)} size={28} color='#404727' />
+                <div className='pr-4 pl-4'>
+                  <h2 style={{ fontSize: 18 }} className="text-[#404727] font-extrabold font-noto" >{currentPage+1}/{urls.length}</h2>
+                </div>
+                <BiSolidRightArrowCircle opacity={currentPage == urls.length - 1 ? "40%" : "100%"} className='cursor-pointer' onClick={() => currentPage == urls.length - 1 ? {} : setCurrentPage(currentPage+1)} size={28} color='#404727' />
+              </div>
             </div>
           </div>
         )}

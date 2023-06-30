@@ -11,6 +11,7 @@ import { SpinnerDotted } from 'spinners-react/lib/esm/SpinnerDotted'
 import { Line, Pie } from 'react-chartjs-2'
 import { ArcElement, CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto'
+import Footer from '../footer/Footer'
 
 Chart.register(CategoryScale, ArcElement);
 
@@ -36,7 +37,7 @@ const Stats = () => {
       getUrl()
     }
   }, [])
-  
+
 
   const getViews = async (urlId: number, mode: string) => {
     setIsLoading(true)
