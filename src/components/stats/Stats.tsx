@@ -22,10 +22,10 @@ const Stats = () => {
   const [mode, setMode] = useState<string>("daily")
   const [shortedUrl, setShortedUrl] = useState<any>({})
   const [occuredError, setOccuredError] = useState<boolean>(false)
-  const [platformChart, setPlatformViews] = useState<any>({})
+  const [platformChart, setPlatformChart] = useState<any>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [views, setViews] = useState<any>({})
-  const [countryViews, setCountryViews] = useState<any>({})
+  const [countryChart, setCountryChart] = useState<any>({})
 
   const token: any = window.localStorage.getItem("token")
 
@@ -46,11 +46,11 @@ const Stats = () => {
           label: response.data.param.views_chart.label,
           value: mode != 'daily' ? sortWeekdaysOrMonths(response.data.param.views_chart.value) : response.data.param.views_chart.value
         })
-        setCountryViews({
+        setCountryChart({
           labels: response.data.param.countries_chart.labels,
           values: response.data.param.countries_chart.values
         })
-        setPlatformViews({
+        setPlatformChart({
           labels: response.data.param.platforms_chart.labels,
           values: response.data.param.platforms_chart.values
         })
@@ -157,13 +157,13 @@ const Stats = () => {
                       <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].country}</h2>
                     </div>
                     {
-                      countryViews.labels.length > 0 ? (
+                      countryChart.labels.length > 0 ? (
                         <Pie style={{ display: 'block', height: -140, width: 280 }} data={{
-                          labels: platformChart.labels,
+                          labels: countryChart.labels,
                           datasets: [
                             {
                               label: 'people saw the website',
-                              data: platformChart.values,
+                              data: countryChart.values,
                               backgroundColor: [
                                 '#404727',
                                 '#5E6839',

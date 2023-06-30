@@ -1,7 +1,7 @@
 import { FaBullseye, FaSadTear, FaShareAlt } from 'react-icons/fa'
 import { PiPencilSimpleLineFill } from 'react-icons/pi'
 import { IoIosAddCircle } from 'react-icons/io'
-import { MdDelete } from 'react-icons/md'
+import { MdDelete, MdFileDownloadDone } from 'react-icons/md'
 import { ImStatsDots } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -112,17 +112,16 @@ const Dashboard = () => {
                                 </div>
                                 <div className='items-center justify-around flex p-4'>
                                   <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
-                                    <input className='bg-[#fafafa]' value={"sturl.pages.dev/" + url.shorted_url} disabled type="text"></input>
+                                    <input className='bg-[#fafafa]' value={"deleafly.pages.dev/" + url.shorted_url} disabled type="text"></input>
                                     <div onClick={() => {
-                                        navigator.clipboard.writeText("https://sturl.pages.dev/" + url.shorted_url); 
-                                        const d: any = document.querySelector("#copy"); 
-                                        d.style.transition = "0.7s"; 
-                                        d.style.backgroundColor = '#9fdb8f'; 
-                                        setTimeout(() => {
-                                          d.style.backgroundColor = '#ccd0af'
-                                        }, 1800)
+                                        navigator.clipboard.writeText("https://deleafly.pages.dev/" + url.shorted_url); 
+                                        const d: any = document.querySelector("#copy-icon"); 
+                                        d.style.display = 'none'
+                                        const a: any = document.querySelector("#copied-icon");
+                                        a.style.display = 'block'
                                       }} id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
-                                      <IoCopy color='white'/>
+                                      <IoCopy id='copy-icon' color='white'/>
+                                      <MdFileDownloadDone className='hidden' id='copied-icon' color='white'/>
                                     </div>
                                   </div>
                                 </div>
@@ -154,7 +153,7 @@ const Dashboard = () => {
                               )
                             }
                           </div>
-                          <a target='_blank' href={`http://sturl.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
+                          <a target='_blank' href={`http://deleafly.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >sturl.pages.dev/{url.shorted_url}</h2></a>
                         </div>
                       </div>
                       <div className='none-block h-10' ></div>

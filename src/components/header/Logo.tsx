@@ -13,7 +13,7 @@ const Logo: React.FC<LogoProps> = ({
   return ( 
     <div style={style} className={"items-center " + class_name }>
       <img style={{ width: 42 }} src={require("../../images/logo.png")} alt="" />
-      <h2 style={{ fontSize: 19.4 }} className="text-[#07242b] font-semibold font-noto" >Sturl</h2>
+      <h2 style={{ fontSize: 19.4 }} className="text-[#07242b] font-semibold font-noto" >Deleafly</h2>
     </div> 
   )
 }

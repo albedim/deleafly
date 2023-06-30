@@ -12,7 +12,7 @@ const Footer = () => {
             <Logo style={{}} class_name={"flex"} />
           </div>
           <div className="justify-around block-flex">
-            <h2 style={{ fontSize: 16 }} className="mt-4 text-[gray] font-regular font-noto" >Copyright © 2023 Sturl.</h2>
+            <h2 style={{ fontSize: 16 }} className="mt-4 text-[gray] font-regular font-noto" >Copyright © 2023 Deleafly.</h2>
           </div>
         </div>
         <div className="justify-around flex">
