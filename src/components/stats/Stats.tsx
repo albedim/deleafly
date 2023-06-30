@@ -124,7 +124,7 @@ const Stats = () => {
                   <h2 style={{ maxWidth: 340, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].views}: {views.label}</h2>
                 </div>
                 <Line
-                  height="600px"
+                  height="400px"
                   width="400px"
                   data={{
                     datasets: [

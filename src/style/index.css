@@ -21,6 +21,9 @@
 .no-padding{
   
 }
+.padding-no{
+  padding-left: 8px;
+}
 
 @media screen and (max-width: 1314px) {
   .flex-none{
@@ -40,5 +43,9 @@
   }
   .no-padding{
     padding: 0;
+  }
+  .padding-no{
+    padding-top: 8px !important;
+    padding-left: 0px !important;
   }
 }
