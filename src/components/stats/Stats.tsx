@@ -110,11 +110,13 @@ const Stats = () => {
           )
         ) : (
           <div>
-            <select className='shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
-              <option value="monthly">Monthly</option>
-              <option value="weekly">Weekly</option>
-              <option value="daily">Daily</option>
-            </select>
+            <div className='justify-around flex p-4'>
+              <select className='rounded-xl bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
+                <option value="monthly">Monthly</option>
+                <option value="weekly">Weekly</option>
+                <option value="daily">Daily</option>
+              </select>
+            </div>
             <div className='flex-block'>
               <div className='bg-[#fcfcfc] rounded-2xl p-8 shadow-lg'>
                 <div className='p-4'>
