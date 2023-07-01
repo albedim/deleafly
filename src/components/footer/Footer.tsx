@@ -17,9 +17,9 @@ const Footer = () => {
         </div>
         <div className="justify-around flex">
           <div className="flex">
-            <div className="pb-14 pt-14 pr-14"><BsTwitter size={24} /></div>
-            <div className="pb-14 pt-14 pr-14"><SiTiktok size={24} /></div>
-            <div className="pb-14 pt-14"><BsGithub size={24} /></div>
+            <div className="pb-14 pt-14 pr-14"><a target="_blank" href="https://twitter.com/deleafly"><BsTwitter color="black" size={24} /></a></div>
+            <div className="pb-14 pt-14 pr-14"><a target="_blank" href="https://tiktok.com/deleafly"><SiTiktok color="black" size={24} /></a></div>
+            <div className="pb-14 pt-14"><a target="_blank" href="https://github.com/deleafly"><BsGithub color="black" size={24} /></a></div>
           </div>
         </div>
       </div>
