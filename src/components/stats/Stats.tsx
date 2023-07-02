@@ -184,6 +184,11 @@ const Stats = () => {
                           text: '',
                         },
                       },
+                      scales: {
+                        y: {
+                          min: 0
+                        }
+                      }
                     }}
                   />
                 </div>
