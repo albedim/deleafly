@@ -34,7 +34,7 @@ const Stats = () => {
   const token: any = window.localStorage.getItem("token")
 
   useEffect(() => {
-    if (token == null)
+    if (!token)
       navigate("/")
     else {
       getUrl()
