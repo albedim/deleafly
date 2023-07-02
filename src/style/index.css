@@ -48,4 +48,22 @@
     padding-top: 8px !important;
     padding-left: 0px !important;
   }
+  .chart-line{
+    width: 345px !important;
+    height: 424px !important;
+  }
+  .box-p-pp{
+    padding-top: 14px !important;
+    padding-left: 45px !important;
+    padding-right: 45px !important;
+  }
+}
+
+.chart-line{
+  width: 400px;
+  height: 500px;
+}
+
+.box-p-pp{
+  padding: 14px;
 }

@@ -1,4 +1,5 @@
-import { FaBullseye, FaSadTear, FaShareAlt } from 'react-icons/fa'
+import { FaBullseye, FaSadTear, FaShareAlt, FaUserAlt } from 'react-icons/fa'
+import { TbAlertCircleFilled } from 'react-icons/tb'
 import { IoIosAddCircle } from 'react-icons/io'
 import { MdDelete } from 'react-icons/md'
 import { ImStatsDots } from 'react-icons/im'
@@ -12,6 +13,7 @@ import { Line, Pie } from 'react-chartjs-2'
 import { ArcElement, CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto'
 import Footer from '../footer/Footer'
+import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
 
 Chart.register(CategoryScale, ArcElement);
 
@@ -21,11 +23,12 @@ const Stats = () => {
   const url = useParams().shorted_url
 
   const [mode, setMode] = useState<string>("daily")
+  const [general, setGeneral] = useState<any>({})
   const [shortedUrl, setShortedUrl] = useState<any>({})
   const [occuredError, setOccuredError] = useState<boolean>(false)
   const [platformChart, setPlatformChart] = useState<any>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [views, setViews] = useState<any>({})
+  const [viewsChart, setViewsChart] = useState<any>({})
   const [countryChart, setCountryChart] = useState<any>({})
 
   const token: any = window.localStorage.getItem("token")
@@ -43,10 +46,7 @@ const Stats = () => {
     setIsLoading(true)
     await axios.get(BASE_URL + "/view/get/" + urlId + "?mode=" + mode)
       .then(response => {
-        setViews({
-          label: response.data.param.views_chart.label,
-          value: mode != 'daily' ? sortWeekdaysOrMonths(response.data.param.views_chart.value) : response.data.param.views_chart.value
-        })
+        setViewsChart(mode != 'daily' ? sortWeekdaysOrMonths(response.data.param.views_chart.value) : response.data.param.views_chart.value)
         setCountryChart({
           labels: response.data.param.countries_chart.labels,
           values: response.data.param.countries_chart.values
@@ -54,6 +54,10 @@ const Stats = () => {
         setPlatformChart({
           labels: response.data.param.platforms_chart.labels,
           values: response.data.param.platforms_chart.values
+        })
+        setGeneral({
+          views: response.data.param.general.views,
+          reviews: response.data.param.general.reviews
         })
       })
       .catch(error => setOccuredError(true))
@@ -111,51 +115,82 @@ const Stats = () => {
           )
         ) : (
           <div>
-            <div className='justify-around flex p-4'>
-              <select className='rounded-xl bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
+            <div className='p-10 none-flex items-center'>
+              <select style={{ width: 154, height: 84 }} className='cursor-pointer font-semibold text-xl rounded-md bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
                 <option value="monthly">Monthly</option>
                 <option value="weekly">Weekly</option>
                 <option value="daily">Daily</option>
               </select>
             </div>
-            <div className='flex-block'>
-              <div className='bg-[#fcfcfc] rounded-2xl p-8 shadow-lg'>
-                <div className='p-4'>
-                  <h2 style={{ maxWidth: 340, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].views}: {views.label}</h2>
+            <div className='justify-between flex-block'>
+              <div className='flex-block'>
+                <div className='box-p-pp'>
+                  <div className='flex bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
+                    <div className='items-center flex p-2'><FaUserAlt size={45} /></div>
+                    <div className='pl-4'>
+                      <h2 style={{ fontSize: 34 }} className="text-[#404727] font-semibold font-noto">{general.views}</h2>
+                      <h2 style={{ fontSize: 18 }} className="text-[#404727] font-regular font-noto">{TEXTS_SCHEMA[mode].views}</h2>
+                    </div>
+                  </div>
                 </div>
-                <Line
-                  height="400px"
-                  width="400px"
-                  data={{
-                    datasets: [
-                      {
-                        label: 'Views',
-                        data: views.value,
-                        borderColor: '#404727',
-                        backgroundColor: '#404727',
-                      }
-                    ],
-                  }}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                      legend: {
-                        position: 'top' as const,
-                      },
-                      title: {
-                        display: true,
-                        text: '',
-                      },
-                    },
-                  }}
-                />
+                <div className='box-p-pp'>
+                  <div className='flex bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
+                    <div className='items-center flex p-2'><PiClockCounterClockwiseDuotone size={54} /></div>
+                    <div className='pl-4'>
+                      <h2 style={{ fontSize: 34 }} className="text-[#404727] font-semibold font-noto">{general.reviews.toFixed()}<span style={{ fontSize: 24 }} className="text-[#404727] font-semibold font-noto"> times</span></h2>
+                      <h2 style={{ fontSize: 18 }} className="text-[#404727] font-regular font-noto">{TEXTS_SCHEMA[mode].reviews}</h2>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className='p-8 flex-block'>
-                <div className='p-8'>
-                  <div className='bg-[#fcfcfc] rounded-2xl p-8 shadow-lg'>
+              <div className='flex-none pr-16 items-center justify-around p-4'>
+                <select style={{ width: 154, height: 84 }} className='cursor-pointer font-semibold text-xl rounded-md bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
+                  <option value="monthly">Monthly</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="daily">Daily</option>
+                </select>
+              </div>
+            </div>
+            <div className='flex-block'>
+              <div className='pl-4 justify-around flex p-8'>
+                <div className='pt-4 chart-line bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
+                  <div className='p-4'>
+                    <h2 style={{ maxWidth: 340, fontSize: 18 }} className="text-[#404727] font-medium font-noto">{TEXTS_SCHEMA[mode].views}</h2>
+                  </div>
+                  <Line
+                    height="400px"
+                    width="400px"
+                    data={{
+                      datasets: [
+                        {
+                          label: 'Views',
+                          data: viewsChart,
+                          borderColor: '#404727',
+                          backgroundColor: '#404727',
+                        }
+                      ],
+                    }}
+                    options={{
+                      responsive: true,
+                      maintainAspectRatio: true,
+                      plugins: {
+                        legend: {
+                          position: 'top' as const,
+                        },
+                        title: {
+                          display: true,
+                          text: '',
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </div>
+              <div className='pt-4 p-8 flex-block'>
+                <div className='pr-4 pt-4 p-8'>
+                  <div style={{ width: 340, height: 440 }} className='pt-4 bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
                     <div className='p-4'>
-                      <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].country}</h2>
+                      <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-medium font-noto">{TEXTS_SCHEMA[mode].country}</h2>
                     </div>
                     {
                       countryChart.labels.length > 0 ? (
@@ -182,10 +217,10 @@ const Stats = () => {
                     }
                   </div>
                 </div>
-                <div className='p-8'>
-                  <div className='bg-[#fcfcfc] rounded-2xl p-8 shadow-lg'>
+                <div className='pl-4 pt-4 p-8'>
+                  <div style={{ width: 340, height: 440 }} className='pt-4 bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
                     <div className='p-4'>
-                      <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-extrabold font-noto">{TEXTS_SCHEMA[mode].platform}</h2>
+                      <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-medium font-noto">{TEXTS_SCHEMA[mode].platform}</h2>
                     </div>
                     {
                       platformChart.labels.length > 0 ? (
