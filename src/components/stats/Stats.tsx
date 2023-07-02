@@ -46,7 +46,7 @@ const Stats = () => {
     setIsLoading(true)
     await axios.get(BASE_URL + "/view/get/" + urlId + "?mode=" + mode)
       .then(response => {
-        setViewsChart(mode != 'daily' ? sortWeekdaysOrMonths(response.data.param.views_chart.value) : response.data.param.views_chart.value)
+        setViewsChart(mode != 'daily' && mode != 'monthly' ? sortWeekdaysOrMonths(response.data.param.views_chart.value) : response.data.param.views_chart.value)
         setCountryChart({
           labels: response.data.param.countries_chart.labels,
           values: response.data.param.countries_chart.values
@@ -117,6 +117,7 @@ const Stats = () => {
           <div>
             <div className='p-10 none-flex items-center'>
               <select style={{ width: 154, height: 84 }} className='cursor-pointer font-semibold text-xl rounded-md bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
+                <option value="yearly">Yearly</option>
                 <option value="monthly">Monthly</option>
                 <option value="weekly">Weekly</option>
                 <option value="daily">Daily</option>
@@ -145,6 +146,7 @@ const Stats = () => {
               </div>
               <div className='flex-none pr-16 items-center justify-around p-4'>
                 <select style={{ width: 154, height: 84 }} className='cursor-pointer font-semibold text-xl rounded-md bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
+                  <option value="yearly">Yearly</option>
                   <option value="monthly">Monthly</option>
                   <option value="weekly">Weekly</option>
                   <option value="daily">Daily</option>

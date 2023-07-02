@@ -8,11 +8,17 @@ export const TEXTS_SCHEMA: any = {
     views: "Total views of today",
     reviews: "Reviews avarage of today"
   },
-  monthly: {
+  yearly: {
     country: "Viewers nationality of this year",
     platform: "Devices used by viewers this year",
     views: "Total views of this year",
     reviews: "Reviews avarage of this year"
+  },
+  monthly: {
+    country: "Viewers nationality of this month",
+    platform: "Devices used by viewers this month",
+    views: "Total views of this month",
+    reviews: "Reviews avarage of this month"
   },
   weekly: {
     country: "Viewers nationality of this week",
