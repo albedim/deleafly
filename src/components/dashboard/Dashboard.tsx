@@ -165,10 +165,14 @@ const Dashboard = () => {
                         <div className='flex no-padding pl-24 items-center justify-around'>
                           <div className='flex'>
                             <div className='p-4'><ImStatsDots className="cursor-pointer" onClick={() => navigate(`/${url.shorted_url}/stats`)} color='#404727' size={24} /></div>
-                            <div className='p-4'><MdDelete className='cursor-pointer' onClick={() => {
-                              removeUrl(url.url_id)
-                              if(urls[currentPage].length == 1)
-                                setCurrentPage(currentPage-1)
+                            <div className='p-4'><MdDelete opacity={urls.length > 1 || urls[currentPage].length > 1 ? "100%" : "40%"} className='cursor-pointer' onClick={() => {
+                              if(urls.length == 1 && urls[currentPage].length == 1){
+                                // not removable
+                              }else{
+                                removeUrl(url.url_id)
+                                if(urls[currentPage].length == 1)
+                                  setCurrentPage(currentPage-1)
+                              }
                             }} color='#404727' size={28} /></div>
                           </div>
                         </div>
