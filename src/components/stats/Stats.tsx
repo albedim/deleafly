@@ -109,13 +109,13 @@ const Stats = () => {
             <div className='mt-24 items-center justify-around flex w-screen' >
               <div>
                 <div className='p-8 items-center justify-around flex' ><FaSadTear size={54} color='#ccd0af' /></div>
-                <h2 style={{ maxWidth: 340, fontSize: 24 }} className="text-center text-[#404727] font-extrabold font-noto">An Error occured while loading your dashboard :(. Try Again</h2>
+                <h2 style={{ maxWidth: 340, fontSize: 24 }} className="text-center text-[#404727] font-extrabold font-noto">An Error occured while loading your dashboard :(. <span className='cursor-pointer' style={{ textDecoration: 'underline' }} onClick={() => navigate(0)} >Try Again</span></h2>
               </div>
             </div>
           )
         ) : (
           <div>
-            <div className='p-10 none-flex items-center'>
+            <div className='pl-20 p-10 none-flex items-center'>
               <select style={{ width: 154, height: 84 }} className='cursor-pointer font-semibold text-xl rounded-md bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
                 <option value="yearly">Yearly</option>
                 <option value="monthly">Monthly</option>
@@ -123,7 +123,7 @@ const Stats = () => {
                 <option value="daily">Daily</option>
               </select>
             </div>
-            <div className='justify-between flex-block'>
+            <div className='general-stats-p justify-between flex-block'>
               <div className='flex-block'>
                 <div className='box-p-pp'>
                   <div className='flex bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
@@ -144,7 +144,7 @@ const Stats = () => {
                   </div>
                 </div>
               </div>
-              <div className='flex-none pr-16 items-center justify-around p-4'>
+              <div className='flex-none items-center justify-around p-4'>
                 <select style={{ width: 154, height: 84 }} className='cursor-pointer font-semibold text-xl rounded-md bg-[#fcfcfc] shadow-md p-4' defaultValue={mode} value={mode} onChange={(e) => { setMode(e.target.value); getViews(shortedUrl.url_id, e.target.value) }} name="" id="">
                   <option value="yearly">Yearly</option>
                   <option value="monthly">Monthly</option>
@@ -154,7 +154,7 @@ const Stats = () => {
               </div>
             </div>
             <div className='flex-block'>
-              <div className='pl-4 justify-around flex p-8'>
+              <div className='justify-around flex p-8'>
                 <div className='pt-4 chart-line bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
                   <div className='p-4'>
                     <h2 style={{ maxWidth: 340, fontSize: 18 }} className="text-[#404727] font-medium font-noto">{TEXTS_SCHEMA[mode].views}</h2>
@@ -224,7 +224,7 @@ const Stats = () => {
                     }
                   </div>
                 </div>
-                <div className='pl-4 pt-4 p-8'>
+                <div className='pt-4 p-8'>
                   <div style={{ width: 340, height: 440 }} className='pt-4 bg-[#fcfcfc] rounded-md p-8 shadow-lg'>
                     <div className='p-4'>
                       <h2 style={{ maxWidth: 284, fontSize: 18 }} className="text-[#404727] font-medium font-noto">{TEXTS_SCHEMA[mode].platform}</h2>

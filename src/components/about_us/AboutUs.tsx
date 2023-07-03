@@ -28,13 +28,13 @@ const AboutUs = () => {
             <div className="pb-8 p-14">
               <div className="w-60 rounded-2xl p-6 bg-[#ccd0af]">
                 <h2 style={{ fontSize: 34 }} className="text-[white] font-extrabold font-noto" >100+</h2>
-                <h2 style={{ fontSize: 16 }} className="text-[white] font-extrabold font-noto" >Tracked url's</h2>
+                <h2 style={{ fontSize: 16 }} className="text-[white] font-extrabold font-noto" >Tracked urls</h2>
               </div>
             </div>
             <div className="p-14">
               <div className="w-60 rounded-2xl p-6 bg-[#ccd0af]">
                 <h2 style={{ fontSize: 34 }} className="text-[white] font-extrabold font-noto" >200+</h2>
-                <h2 style={{ fontSize: 16 }} className="text-[white] font-extrabold font-noto" >Url's views per day</h2>
+                <h2 style={{ fontSize: 16 }} className="text-[white] font-extrabold font-noto" >Urls' views per day</h2>
               </div>
             </div>
           </div>

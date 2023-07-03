@@ -54,8 +54,19 @@
   }
   .box-p-pp{
     padding-top: 14px !important;
-    padding-left: 45px !important;
-    padding-right: 45px !important;
+    padding-left: 64px !important;
+    padding-right: 64px !important;
+  }
+  .hover-p{
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .get_started_padding{
+    padding-left: 26px !important;
+  }
+  .general-stats-p{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
   }
 }
 
@@ -66,4 +77,14 @@
 
 .box-p-pp{
   padding: 14px;
+}
+
+.hover-p{
+  padding-left: 84px;
+  padding-right: 84px;
+}
+
+.general-stats-p{
+  padding-right: 40px;
+  padding-left: 18px;
 }

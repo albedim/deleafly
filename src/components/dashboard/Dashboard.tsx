@@ -84,7 +84,7 @@ const Dashboard = () => {
             <div className='mt-24 items-center justify-around flex w-screen' >
               <div>
                 <div className='p-8 items-center justify-around flex' ><FaSadTear size={54} color='#ccd0af' /></div>
-                <h2 style={{ maxWidth: 340, fontSize: 24 }} className="text-center text-[#404727] font-extrabold font-noto">An Error occured while loading your dashboard :(. Try Again</h2>
+                <h2 style={{ maxWidth: 340, fontSize: 24 }} className="text-center text-[#404727] font-extrabold font-noto">An Error occured while loading your dashboard :(. <span className='cursor-pointer' style={{ textDecoration: 'underline' }} onClick={() => navigate(0)} >Try Again</span></h2>
               </div>
             </div>
           )
@@ -94,7 +94,7 @@ const Dashboard = () => {
             <Modal body={modalOptions.body} onClose={() => setModalOptions({ body: <div></div>, visible: false })} visible={modalOptions.visible} />
             <div>
               <div className="pb-4 p-14 justify-between flex">
-                <h2 style={{ fontSize: 24 }} className="text-[#404727] font-extrabold font-noto" >Your url's</h2>
+                <h2 style={{ fontSize: 24 }} className="text-[#404727] font-extrabold font-noto" >Your urls</h2>
                 <div className='flex'>
                   <h2 style={{ fontSize: 24 }} className="text-[#ccd0af] font-extrabold font-noto" >{getUrlsQuantity()}/{maxUrls}</h2>
                   <div className='items-center justify-around flex pl-2' ><IoIosAddCircle className='cursor-pointer' onClick={() => setCreateUrlModalOptions({ visible: true })} size={28} color='#404727' /></div>

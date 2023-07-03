@@ -17,10 +17,10 @@ const GetStarted = () => {
     <div className="justify-around flex">
       <SignupModal first_url={url} onClose={() => setModalOptions({ visible: false })} visible={modalOptions.visible} />
       <div className="mt-4 flex">
-        <div className="items-center justify-around flex">
+        <div className="get_started_padding items-center justify-around flex">
           <div>
             <div className="pl-14 pr-14 pt-14" ><h2 style={{ maxWidth: 414, fontSize: 44 }} className="text-[#07242b] font-extrabold font-noto" >track your <span className="text-[#404727]" >links</span> with us</h2></div>
-            <div className="pt-6 pb-14 pr-14 pl-14" ><h2 style={{ maxWidth: 484, fontSize: 18.4 }} className="font-medium font-noto" >Track the traffic on your url's easy and fast with our clean dashboard.</h2></div>
+            <div className="pt-6 pb-14 pr-14 pl-14" ><h2 style={{ maxWidth: 484, fontSize: 18.4 }} className="font-medium font-noto" >Track the traffic on your urls easy and fast with our clean dashboard.</h2></div>
             <div className="flex-block pl-14 pr-14 pb-14" >
               <div className="pr-2">
                 <input onChange={(e) => setUrl(e.target.value)} value={url} style={{ fontSize: 16 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-4 pt-4 pr-1 pl-8" type="text" placeholder="Write your url" />

@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   const [signinModalOptions, setSigninModalOptions] = useState({ visible: false })
 
   return (
-    <div style={{ paddingLeft: 84, paddingRight: 84 }} className="justify-between items-center flex w-screen pb-14 pt-14">
+    <div className="hover-p justify-between items-center flex w-screen pb-14 pt-14">
       <SigninModal onClose={() => setSigninModalOptions({ visible: false })} visible={signinModalOptions.visible} />
       <Logo style={{ paddingLeft: 40 }} class_name="flex-none" />
       <Logo style={{}} class_name="none-flex" />
