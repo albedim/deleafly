@@ -1,37 +1,42 @@
 import { FaBullseye, FaSadTear, FaShareAlt, FaUserAlt } from 'react-icons/fa'
-import { TbAlertCircleFilled } from 'react-icons/tb'
-import { IoIosAddCircle } from 'react-icons/io'
-import { MdDelete } from 'react-icons/md'
-import { ImStatsDots } from 'react-icons/im'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URL, TEXTS_SCHEMA } from '../../utils'
-import jwtDecode from 'jwt-decode'
 import { SpinnerDotted } from 'spinners-react/lib/esm/SpinnerDotted'
 import { Line, Pie } from 'react-chartjs-2'
 import { ArcElement, CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto'
-import Footer from '../footer/Footer'
 import { PiClockCounterClockwiseDuotone } from 'react-icons/pi'
 
+
 Chart.register(CategoryScale, ArcElement);
+
 
 const Stats = () => {
 
   const navigate = useNavigate()
+
   const url = useParams().shorted_url
 
   const [mode, setMode] = useState<string>("daily")
+
   const [general, setGeneral] = useState<any>({})
+
   const [shortedUrl, setShortedUrl] = useState<any>({})
+
   const [occuredError, setOccuredError] = useState<boolean>(false)
+
   const [platformChart, setPlatformChart] = useState<any>({})
+
   const [isLoading, setIsLoading] = useState<boolean>(true)
+
   const [viewsChart, setViewsChart] = useState<any>({})
+
   const [countryChart, setCountryChart] = useState<any>({})
 
   const token: any = window.localStorage.getItem("token")
+
 
   useEffect(() => {
     if (!token)
@@ -64,6 +69,7 @@ const Stats = () => {
     setIsLoading(false)
   }
 
+
   function sortWeekdaysOrMonths(jsonData: any) {
     const sortedData = Object.entries(jsonData)
       .sort(([keyA, valueA], [keyB, valueB]) => {
@@ -75,6 +81,7 @@ const Stats = () => {
     return sortedData
   }
 
+
   function isWeekDay(jsonData: any) {
     const data = jsonData
     const firstKey = Object.keys(data)[0];
@@ -83,6 +90,7 @@ const Stats = () => {
 
     return weekdays.includes(firstKey.toLowerCase())
   }
+
 
   const getUrl = async () => {
     setIsLoading(true)
@@ -93,6 +101,7 @@ const Stats = () => {
       })
       .catch(error => navigate("/"))
   }
+
 
   return (
     <div className="items-center justify-around w-screen flex">

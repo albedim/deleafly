@@ -1,38 +1,46 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import { RiCloseFill } from "react-icons/ri";
 import "./Modal.css";
 import { BASE_URL } from "../../utils";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+
 
 interface AccountModalProps {
   onClose: () => void,
   visible: boolean,
 }
 
-const AccountModal: React.FC<AccountModalProps> = ({ visible, onClose }) => {
+
+const AccountModal: React.FC<AccountModalProps> = ({
+  visible,
+  onClose
+}) => {
 
   const token: any = window.localStorage.getItem("token")
+
   const user: any = jwtDecode(token)
+
   const [accountSchema, setAccountSchema] = useState({
     complete_name: user.sub.complete_name, 
     email: user.sub.email,
     new_password: ''
   })
+
   const isAccountSchemaValid = ( 
     (accountSchema.complete_name != "" && accountSchema.complete_name != user.sub.complete_name) && accountSchema.new_password == "" ||
     (accountSchema.new_password != "" && accountSchema.new_password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/))
   )
-  const navigate  = useNavigate()
+
   const [error, setError] = useState("")
+
 
   const handleAccountSchema = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newAccountSchema: any = { ...accountSchema }
     newAccountSchema[e.target.name] = e.target.value
     setAccountSchema(newAccountSchema)
   }
+
 
   const change = async () => {
     await axios.put(BASE_URL + "/user/change/" + user.sub.user_id, accountSchema)
@@ -42,6 +50,7 @@ const AccountModal: React.FC<AccountModalProps> = ({ visible, onClose }) => {
     })
     .catch(error => setError(error.response.data.error))
   }
+
 
   return (
     <>

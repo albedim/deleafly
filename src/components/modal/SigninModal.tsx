@@ -6,26 +6,36 @@ import { BASE_URL } from "../../utils";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 interface SigninmodalProps {
   onClose: () => void,
   visible: boolean,
 }
 
-const SigninModal: React.FC<SigninmodalProps> = ({ visible, onClose }) => {
+
+const SigninModal: React.FC<SigninmodalProps> = ({
+  visible,
+  onClose
+}) => {
 
   const [signinSchema, setSigninSchema] = useState({
     email: '',
     password: ''
   })
+
   const isSigninSchemaValid = signinSchema.email != "" && signinSchema.password != ""
+
   const navigate  = useNavigate()
+
   const [error, setError] = useState("")
+
 
   const handleSigninSchema = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSigninSchema: any = { ...signinSchema }
     newSigninSchema[e.target.name] = e.target.value
     setSigninSchema(newSigninSchema)
   }
+
 
   const signin = async () => {
     await axios.post(BASE_URL + "/user/signin", signinSchema)
@@ -36,6 +46,7 @@ const SigninModal: React.FC<SigninmodalProps> = ({ visible, onClose }) => {
     })
     .catch(error => setError(error.response.data.error))
   }
+  
 
   return (
     <>

@@ -1,18 +1,17 @@
 import '../../style/index.css'
 import { useState } from 'react'
-import Modal from '../modal/Modal';
 import SignupModal from '../modal/SignupModal';
-import { Line, Pie } from 'react-chartjs-2';
-import { ArcElement, CategoryScale } from 'chart.js'
-import Chart from 'chart.js/auto';
 
 
 const GetStarted = () => {
 
   const [modalOptions, setModalOptions] = useState({ visible: false })
+
   const [url, setUrl] = useState("")
+
   const isUrlValid = url.split(".").length > 1 && url.split(".")[1].length > 0
 
+  
   return (
     <div className="justify-around flex">
       <SignupModal first_url={url} onClose={() => setModalOptions({ visible: false })} visible={modalOptions.visible} />

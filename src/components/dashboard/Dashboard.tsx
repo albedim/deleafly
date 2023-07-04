@@ -1,40 +1,50 @@
-import { FaBullseye, FaSadTear, FaShareAlt } from 'react-icons/fa'
+import { FaSadTear, FaShareAlt } from 'react-icons/fa'
 import { PiPencilSimpleLineFill } from 'react-icons/pi'
 import { IoIosAddCircle } from 'react-icons/io'
 import { MdDelete, MdFileDownloadDone } from 'react-icons/md'
 import { ImStatsDots } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
+import { IoClose, IoCopy, IoSave } from 'react-icons/io5'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../../utils'
-import jwtDecode from 'jwt-decode'
-import { SpinnerDotted } from 'spinners-react/lib/esm/SpinnerDotted'
-import { IoClose, IoCopy, IoSave } from 'react-icons/io5'
 import Modal from '../modal/Modal'
 import CreateUrlModal from '../modal/CreateUrlModal'
 import { BiSolidLeftArrowCircle, BiSolidRightArrowCircle } from 'react-icons/bi'
+import { SpinnerDotted } from 'spinners-react'
 
 const Dashboard = () => {
 
   const navigate = useNavigate()
+
   const [currentPage, setCurrentPage] = useState(0)
+
   const [createUrlModalOptions, setCreateUrlModalOptions] = useState({ visible: false })
+
   const [modalOptions, setModalOptions] = useState({ body: <div></div>, visible: false })
+
   const [inEditingUrl, setInEditingUrl] = useState<any>({
     url_id: 0,
     name: ''
   })
+
   const [occuredError, setOccuredError] = useState(false)
+
   const [isLoading, setIsLoading] = useState(true)
+
   const [maxUrls, setMaxUrls] = useState(0)
+
   const [urls, setUrls] = useState<any[][]>([])
+
   const token: any = window.localStorage.getItem("token")
+
 
   useEffect(() => {
     if (token == null)
       navigate("/")
     else getUrls()
   }, [])
+
 
   const getUrls = async () => {
     await axios.get(BASE_URL + "/url/get/of", { headers: { "Authorization": `Bearer ${token}` } })
@@ -46,6 +56,7 @@ const Dashboard = () => {
     setIsLoading(false)
   }
 
+
   const removeUrl = async (urlId: number) => {
     await axios.delete(BASE_URL + "/url/remove/" + urlId)
       .then(response => {
@@ -55,6 +66,7 @@ const Dashboard = () => {
       .catch(error => console.log(error))
   }
 
+
   const editUrl = async () => {
     await axios.put(BASE_URL + "/url/change/" + inEditingUrl.url_id + "?name=" + inEditingUrl.name, {}, { headers: { "Authorization": `Bearer ${token}` } })
       .then(response => {
@@ -63,11 +75,13 @@ const Dashboard = () => {
       .catch(error => console.log(error))
   }
 
+
   const getUrlsQuantity = () => {
     var counter = 0
     urls.forEach(page => counter += page.length)
     return counter
   }
+
 
   return (
     <div className="items-center justify-around w-screen flex">
@@ -113,11 +127,17 @@ const Dashboard = () => {
                                 <div className='p-4'>
                                   <div className='pl-6'>
                                     <h2 style={{ width: 284, fontSize: 16 }} className="text-[#404727] font-bold font-noto" >
-                                      Copy the url and share it to see its traffic.</h2>
+                                      Your sharable tracked url:</h2>
                                   </div>
                                   <div className='items-center justify-around flex p-4'>
                                     <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
-                                      <input className='bg-[#fafafa]' value={"deleafly.pages.dev/" + url.shorted_url} disabled type="text"></input>
+                                      <input onMouseOver={() => {
+                                        const d: any = document.querySelector("#original_url");
+                                        d.style.display = 'block'
+                                      }} onMouseOut={() => {
+                                        const d: any = document.querySelector("#original_url");
+                                        d.style.display = 'none' 
+                                      }} className='bg-[#fafafa]' value={"deleafly.pages.dev/" + url.shorted_url} disabled type="text"></input>
                                       <div onClick={() => {
                                           navigator.clipboard.writeText("https://deleafly.pages.dev/" + url.shorted_url); 
                                           const d: any = document.querySelector("#copy-icon"); 
@@ -127,6 +147,17 @@ const Dashboard = () => {
                                         }} id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
                                         <IoCopy id='copy-icon' color='white'/>
                                         <MdFileDownloadDone className='hidden' id='copied-icon' color='white'/>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div id='original_url' style={{ display: "none", marginTop: -184 }} className='shadow-lg rounded-md pt-4 bg-[#fafafa] absolute'>
+                                    <div className='pl-6'>
+                                      <h2 style={{ width: 284, fontSize: 16 }} className="text-[#404727] font-bold font-noto" >
+                                        Connected url:</h2>
+                                    </div>
+                                    <div className='items-center justify-around flex pl-0 pt-0 p-4'>
+                                      <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
+                                        <input className='cursor-not-allowed bg-[#fafafa]' value={url.original_url} disabled type="text"></input>
                                       </div>
                                     </div>
                                   </div>

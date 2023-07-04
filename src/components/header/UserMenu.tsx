@@ -4,27 +4,36 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AccountModal from "../modal/AcountModal";
 
+
 interface UserMenuProps{
   token: any
 }
+
 
 const UserMenu: React.FC<UserMenuProps> = ({
   token
 }) => {
 
   const [accountModalOptions, setAccountModalOptions] = useState({ visible: false })
+
   const [anchorEl, setAnchorEl] = useState(null);
+
   const user: any = jwtDecode(token)
+
   const open = Boolean(anchorEl);
+
   const navigate = useNavigate()
+
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
 
   return (
     <div className='align-center space-around display-flex border-radius-5'>

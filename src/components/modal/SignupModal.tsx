@@ -6,13 +6,19 @@ import { BASE_URL } from "../../utils";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 interface SignupModalProps {
   onClose: () => void,
   visible: boolean,
   first_url: string
 }
 
-const SignupModal: React.FC<SignupModalProps> = ({ first_url, visible, onClose }) => {
+
+const SignupModal: React.FC<SignupModalProps> = ({
+  first_url,
+  visible,
+  onClose
+}) => {
 
   const [signupSchema, setSignupSchema] = useState({
     email: '',
@@ -25,6 +31,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ first_url, visible, onClose }
 
   const navigate = useNavigate()
 
+
   const isSignupSchemaValid = (
     signupSchema.complete_name != ""
     && signupSchema.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
@@ -32,12 +39,14 @@ const SignupModal: React.FC<SignupModalProps> = ({ first_url, visible, onClose }
     && signupSchema.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
   )
 
+
   const handleSignupSchema = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSignupSchema: any = { ...signupSchema }
     newSignupSchema[e.target.name] = e.target.value
     setSignupSchema(newSignupSchema)
     console.log(newSignupSchema)
   }
+
 
   const signup = async () => {
     await axios.post(BASE_URL + "/user/signup", signupSchema)
@@ -49,8 +58,10 @@ const SignupModal: React.FC<SignupModalProps> = ({ first_url, visible, onClose }
     .catch(error => setError(error.response.data.error))
   }
 
+
   useEffect(() => setSignupSchema({ ...signupSchema, first_url: first_url }), [first_url])
 
+  
   return (
     <>
       {

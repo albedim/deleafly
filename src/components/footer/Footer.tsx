@@ -3,6 +3,7 @@ import { BsTwitter, BsGithub } from 'react-icons/bs'
 import { SiTiktok } from 'react-icons/si'
 
 const Footer = () => {
+  
   return (
     <>
       <div style={{ height: 54 }} ></div>

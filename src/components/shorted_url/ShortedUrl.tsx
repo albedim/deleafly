@@ -8,7 +8,6 @@ const ShortedUrl = () => {
 
   const url = useParams().shorted_url
 
-
   const create = async () => {
     const res = await axios.get('https://geolocation-db.com/json/')
     await axios.post(BASE_URL + "/view/create", {
@@ -18,7 +17,7 @@ const ShortedUrl = () => {
       country_code: res.data.country_code
     })
     .then(response => window.location.href = "https://" + response.data.param.original_url)
-    .catch(error => console.log(error))
+    .catch(error => create())
     return
   }
 

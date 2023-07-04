@@ -3,13 +3,19 @@ import ReactDOM from "react-dom";
 import { RiCloseFill } from "react-icons/ri";
 import "./Modal.css";
 
+
 interface ModalProps {
   body: any,
   onClose: () => void,
   visible: boolean
 }
 
-const Modal: React.FC<ModalProps> = ({ visible, body, onClose }) => {
+
+const Modal: React.FC<ModalProps> = ({
+  visible,
+  body,
+  onClose
+}) => {
 
   return (
     <>

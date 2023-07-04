@@ -7,17 +7,22 @@ import jwtDecode from "jwt-decode";
 import UserMenu from "./UserMenu";
 import AccountModal from "../modal/AcountModal";
 
+
 interface HeaderProps {
   route_name: String
 }
+
 
 const Header: React.FC<HeaderProps> = ({
   route_name
 }) => {
 
   const navigate = useNavigate()
+
   const token: any = window.localStorage.getItem("token")
+
   const [signinModalOptions, setSigninModalOptions] = useState({ visible: false })
+  
 
   return (
     <div className="hover-p justify-between items-center flex w-screen pb-14 pt-14">

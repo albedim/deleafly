@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import { RiCloseFill } from "react-icons/ri";
 import "./Modal.css";
 import { BASE_URL } from "../../utils";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+
 
 interface AccountModalProps {
   onClose: () => void,
@@ -13,23 +12,37 @@ interface AccountModalProps {
   visible: boolean,
 }
 
-const CreateUrlModal: React.FC<AccountModalProps> = ({ setUrls, visible, onClose }) => {
+
+const CreateUrlModal: React.FC<AccountModalProps> = ({
+  setUrls, 
+  visible, 
+  onClose 
+}) => {
 
   const token: any = window.localStorage.getItem("token")
+
   const user: any = jwtDecode(token)
+
   const [urlSchema, setUrlSchema] = useState({
     name: '',
     original_url: '',
   })
-  const isUrlSchemaValid = urlSchema.name.length <= 21 && urlSchema.name != "" && urlSchema.original_url.split(".").length > 1 && urlSchema.original_url.split(".")[1].length > 1
-  const navigate  = useNavigate()
+  
+  const isUrlSchemaValid = 
+    urlSchema.name.length <= 21 &&
+    urlSchema.name != "" && 
+    urlSchema.original_url.split(".").length > 1 && 
+    urlSchema.original_url.split(".")[1].length > 1
+  
   const [error, setError] = useState("")
+
 
   const handleUrlSchema = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newUrlSchema: any = { ...urlSchema }
     newUrlSchema[e.target.name] = e.target.value
     setUrlSchema(newUrlSchema)
   }
+
 
   const create = async () => {
     await axios.post(BASE_URL + "/url/create", { ...urlSchema, user_id: user.sub.user_id })
@@ -39,6 +52,7 @@ const CreateUrlModal: React.FC<AccountModalProps> = ({ setUrls, visible, onClose
     })
     .catch(error => setError(error.response.data.error))
   }
+
 
   return (
     <>
