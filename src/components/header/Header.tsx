@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({
       <div style={{ paddingRight: 284 }} className="flex-none">
         <div style={{ paddingRight: 184 }} className="items-center flex">
           <div onClick={() => navigate("/")} style={{ color: route_name == 'get_started' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2 className="cursor-pointer" >Get Started</h2></div>
-          <div onClick={() => navigate("/about")} style={{ color: route_name == 'about_us' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2 className="cursor-pointer" >About us</h2></div>
+          <div onClick={() => {navigate("/"); setTimeout(() => window.scrollTo({ top: 740, behavior: 'smooth' }), 100)}} style={{ color: route_name == 'about_us' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={token == null ? "shake font-semibold font-noto pr-14 pl-14" : "font-semibold font-noto pr-14 pl-14"}><h2 className="cursor-pointer" >About us</h2></div>
           <div onClick={() => token != null ? navigate("/dashboard") : null} style={{ color: route_name == 'dashboard' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pr-14 pl-14"}><h2 className="cursor-pointer" >Dashboard</h2></div>
         </div>
         <div className="items-center flex">

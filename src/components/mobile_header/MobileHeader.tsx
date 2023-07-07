@@ -37,7 +37,7 @@ const MobileHeader: React.FC<MobileHeaderProps> = ({
         <div style={{ paddingLeft: 34 }}>
           <div style={{ paddingLeft: 34 }}>
             <div onClick={() => {navigate("/"); onClose()}} style={{ color: route_name == 'get_started' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pt-6 pb-6"}><h2 className="cursor-pointer" >Get Started</h2></div>
-            <div onClick={() => {navigate("/about"); onClose()}} style={{ color: route_name == 'about_us' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pt-6 pb-6"}><h2 className="cursor-pointer" >About us</h2></div>
+            <div onClick={() => {navigate("/"); setTimeout(() => window.scrollTo({ top: 740, behavior: 'smooth' }), 100); onClose()}} style={{ color: route_name == 'about_us' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pt-6 pb-6"}><h2 className="cursor-pointer" >About us</h2></div>
             <div onClick={() => token != null ? (navigate("/dashboard"), onClose()) : null} style={{ color: route_name == 'dashboard' ? "#ccd0af" : "#404727", fontSize: 18.4 }} className={"font-semibold font-noto pt-6 pb-6"}><h2 className="cursor-pointer" >Dashboard</h2></div>
           </div>
           <div style={{ paddingTop: 54, paddingLeft: 34 }}>

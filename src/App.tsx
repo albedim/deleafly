@@ -15,10 +15,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<><Header route_name="get_started" /><GetStarted/></>} />
+        <Route path="/" element={<><Header route_name="get_started" /><GetStarted/><Footer/></>} />
         <Route path="/:shorted_url/stats" element={<><Header route_name="dashboard" /><Stats/></>} />
         <Route path="/:shorted_url" element={<><ShortedUrl/></>} />
-        <Route path="/about" element={<><Header route_name="about_us" /><AboutUs/><Footer/></>} />
+        {/*<Route path="/about" element={<><Header route_name="about_us" /><AboutUs/><Footer/></>} />*/}
         <Route path="/dashboard" element={<><Header route_name="dashboard" /><Dashboard/></>} />
       </Routes>
     </BrowserRouter>

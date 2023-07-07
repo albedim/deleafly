@@ -71,6 +71,9 @@
   .w-mobile{
     width: 184px !important;
   }
+  .max-w{
+    max-width: 314px !important;
+  }
 }
 
 .chart-line{
@@ -91,3 +94,21 @@
   padding-right: 40px;
   padding-left: 18px;
 }
+
+.max-w{
+  max-width: 614px;
+}
+
+.shake{
+  animation: jump-shaking 1.38s infinite;
+}
+
+@keyframes jump-shaking{
+  0% { transform: translateX(0) }
+  25% { transform: translateY(-6px) }
+  35% { transform: translateY(-6px) rotate(7deg) }
+  55% { transform: translateY(-6px) rotate(-7deg) }
+  65% { transform: translateY(-6px) rotate(7deg) }
+  75% { transform: translateY(-6px) rotate(-7deg) }
+  100% { transform: translateY(0) rotate(0) }
+ }
