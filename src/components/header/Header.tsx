@@ -6,6 +6,7 @@ import { useState } from "react";
 import jwtDecode from "jwt-decode";
 import UserMenu from "./UserMenu";
 import AccountModal from "../modal/AcountModal";
+import MobileHeader from "../mobile_header/MobileHeader";
 
 
 interface HeaderProps {
@@ -19,6 +20,8 @@ const Header: React.FC<HeaderProps> = ({
 
   const navigate = useNavigate()
 
+  const [mobileHeaderVisible, setMobileHeaderVisible] = useState(false)
+
   const token: any = window.localStorage.getItem("token")
 
   const [signinModalOptions, setSigninModalOptions] = useState({ visible: false })
@@ -26,6 +29,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <div className="hover-p justify-between items-center flex w-screen pb-14 pt-14">
+      <MobileHeader onClose={() => setMobileHeaderVisible(false)} visible={mobileHeaderVisible} route_name={route_name}/>
       <SigninModal onClose={() => setSigninModalOptions({ visible: false })} visible={signinModalOptions.visible} />
       <Logo style={{ paddingLeft: 40 }} class_name="flex-none" />
       <Logo style={{}} class_name="none-flex" />
@@ -39,11 +43,11 @@ const Header: React.FC<HeaderProps> = ({
           {
             token != null ?
               <UserMenu token={token}/>
-              : <IoLogIn onClick={() => setSigninModalOptions({ visible: true })} color="#404727" size={30} />
+              : <IoLogIn className="cursor-pointer" onClick={() => setSigninModalOptions({ visible: true })} color="#404727" size={30} />
           }
         </div>
       </div>
-      <IoMenu className="none-block" size={50} />
+      <IoMenu onClick={() => setMobileHeaderVisible(true)} className="none-block" size={50} />
     </div>
   );
 
