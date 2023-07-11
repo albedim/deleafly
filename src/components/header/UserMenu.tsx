@@ -37,7 +37,9 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
   return (
     <div className='align-center space-around display-flex border-radius-5'>
-      <AccountModal onClose={() => setAccountModalOptions({ visible: false })} visible={accountModalOptions.visible} />
+      <AccountModal 
+        onClose={() => setAccountModalOptions({ visible: false })} 
+        visible={accountModalOptions.visible} />
       <Button
         id="basic-demo-button"
         style={{ backgroundColor: "transparent" }}
@@ -48,7 +50,15 @@ const UserMenu: React.FC<UserMenuProps> = ({
       >
         <div className='pr-8 flex'>
           <div className='items-center justify-around flex'>
-            <img style={{ width: 28 }} src={"https://api.dicebear.com/6.x/big-ears-neutral/svg?seed="+user.sub.complete_name.replace(" ", "")+"&radius=20&backgroundColor=da9969,f8b788"} alt="" />
+            <img 
+              style={{ width: 28 }} 
+              src={
+                "https://api.dicebear.com/6.x/big-ears-neutral/svg?seed="+
+                user.sub.complete_name.replace(" ", "")+
+                "&radius=20&backgroundColor=da9969,f8b788"
+              } 
+              alt="" 
+            />
           </div>
         </div>
       </Button>

@@ -31,7 +31,6 @@ const SignupModal: React.FC<SignupModalProps> = ({
 
   const navigate = useNavigate()
 
-
   const isSignupSchemaValid = (
     signupSchema.complete_name != ""
     && signupSchema.email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
@@ -75,25 +74,70 @@ const SignupModal: React.FC<SignupModalProps> = ({
                 </div>
                 <div className='pt-9 p-14'>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Complete name</h2>
-                    <input placeholder="Marcus Loren" name='complete_name' onChange={(e) => handleSignupSchema(e)} value={signupSchema.complete_name} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="text" />
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-2 font-medium font-noto" >Complete name</h2>
+                    <input 
+                      placeholder="Marcus Loren" 
+                      name='complete_name' 
+                      onChange={(e) => handleSignupSchema(e)} 
+                      value={signupSchema.complete_name} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="text" 
+                    />
                   </div>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >E-mail</h2>
-                    <input placeholder="marcusloren@gmail.com" name='email' onChange={(e) => handleSignupSchema(e)} value={signupSchema.email} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="text" />
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-2 font-medium font-noto" >E-mail
+                    </h2>
+                    <input 
+                      placeholder="marcusloren@gmail.com" 
+                      name='email' 
+                      onChange={(e) => handleSignupSchema(e)} 
+                      value={signupSchema.email} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="text" 
+                    />
                   </div>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Password</h2>
-                    <input placeholder="Marcus2023" name='password' onChange={(e) => handleSignupSchema(e)} value={signupSchema.password} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="password" />
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-2 font-medium font-noto" >Password
+                    </h2>
+                    <input 
+                      placeholder="Marcus2023" 
+                      name='password' 
+                      onChange={(e) => handleSignupSchema(e)} 
+                      value={signupSchema.password} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="password" 
+                    />
                   </div>
                   <div>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-1 font-medium font-noto" >First url</h2>
-                    <input name='first_url' onChange={(e) => handleSignupSchema(e)} value={signupSchema.first_url} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="text" />
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-1 font-medium font-noto" >First url
+                    </h2>
+                    <input 
+                      name='first_url' 
+                      onChange={(e) => handleSignupSchema(e)} 
+                      value={signupSchema.first_url} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="text" 
+                    />
                   </div>
                   <div>
-                    <h2 style={{ fontSize: 14.4 }} className="text-[red] pl-1 pt-2 font-medium font-noto" >{error}</h2>
+                    <h2 
+                      style={{ fontSize: 14.4 }}
+                      className="text-[red] pl-1 pt-2 font-medium font-noto" >{error}
+                    </h2>
                   </div>
-                  <div  className="justify-between flex pt-9">
+                  <div className="justify-between flex pt-9">
                     <div></div>
                     <button disabled={!isSignupSchemaValid} onClick={() => signup()} style={{ cursor: isSignupSchemaValid ? 'pointer' : 'not-allowed', fontSize: 14 }} className="font-medium font-noto text-[white] rounded-2xl bg-[#404727] pb-4 pt-4 pr-7 pl-7" >Next</button>
                   </div>

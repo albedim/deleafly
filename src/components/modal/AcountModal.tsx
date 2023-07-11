@@ -28,8 +28,13 @@ const AccountModal: React.FC<AccountModalProps> = ({
   })
 
   const isAccountSchemaValid = ( 
-    (accountSchema.complete_name != "" && accountSchema.complete_name != user.sub.complete_name) && accountSchema.new_password == "" ||
-    (accountSchema.new_password != "" && accountSchema.new_password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/))
+    (accountSchema.complete_name != "" && 
+      accountSchema.complete_name != user.sub.complete_name
+    ) && accountSchema.new_password == "" ||
+    (
+      accountSchema.new_password != "" && 
+      accountSchema.new_password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)
+    )
   )
 
   const [error, setError] = useState("")
@@ -66,22 +71,61 @@ const AccountModal: React.FC<AccountModalProps> = ({
                 <div className='pt-4 pl-14 pr-14 pb-14'>
                   <div className='pb-3'>
                     <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Complete name</h2>
-                    <input placeholder="Marcus Loren" name='complete_name' onChange={(e) => handleAccountSchema(e)} value={accountSchema.complete_name} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="text" />
+                    <input
+                      placeholder="Marcus Loren" 
+                      name='complete_name' 
+                      onChange={(e) => handleAccountSchema(e)} 
+                      value={accountSchema.complete_name} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="text" 
+                    />
                   </div>
                   <div className='pb-3'>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >E-mail</h2>
-                    <input name='email' disabled onChange={(e) => handleAccountSchema(e)} value={accountSchema.email} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="text" />
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-2 font-medium font-noto" >E-mail
+                    </h2>
+                    <input 
+                      name='email' 
+                      disabled 
+                      onChange={(e) => handleAccountSchema(e)} 
+                      value={accountSchema.email} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="text" 
+                    />
                   </div>
-                  <div className='pb-3'>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >New Password</h2>
-                    <input placeholder="Marcus23" name='new_password' onChange={(e) => handleAccountSchema(e)} value={accountSchema.new_password} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="password" />
+                  <div 
+                    className='pb-3'>
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-2 font-medium font-noto" >New Password
+                    </h2>
+                    <input 
+                      placeholder="Marcus23" 
+                      name='new_password' 
+                      onChange={(e) => handleAccountSchema(e)} 
+                      value={accountSchema.new_password} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="password" 
+                    />
                   </div>
                   <div>
-                    <h2 style={{ fontSize: 14.4 }} className="text-[red] pl-1 pt-2 font-medium font-noto" >{error}</h2>
+                    <h2 
+                      style={{ fontSize: 14.4 }} 
+                      className="text-[red] pl-1 pt-2 font-medium font-noto" >{error}
+                    </h2>
                   </div>
-                  <div  className="justify-between flex pt-4">
+                  <div className="justify-between flex pt-4">
                     <div></div>
-                    <button disabled={!isAccountSchemaValid} onClick={() => change()} style={{ cursor: isAccountSchemaValid ? 'pointer' : 'not-allowed', fontSize: 14 }} className="font-medium font-noto text-[white] rounded-2xl bg-[#404727] pb-4 pt-4 pr-7 pl-7" >Change</button>
+                    <button 
+                      disabled={!isAccountSchemaValid} 
+                      onClick={() => change()} 
+                      style={{ cursor: isAccountSchemaValid ? 'pointer' : 'not-allowed', fontSize: 14 }} 
+                      className="font-medium font-noto text-[white] rounded-2xl bg-[#404727] pb-4 pt-4 pr-7 pl-7" >Change
+                    </button>
                   </div>
                 </div>
               </div>

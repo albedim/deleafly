@@ -67,18 +67,45 @@ const CreateUrlModal: React.FC<AccountModalProps> = ({
                 </div>
                 <div className='pt-4 pl-14 pr-14 pb-14'>
                   <div>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Url name</h2>
-                    <input placeholder="My youtube channel" name='name' onChange={(e) => handleUrlSchema(e)} value={urlSchema.name} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="text" />
-                    <h2 style={{ textAlign: 'right', fontSize: 14.4 }} className="pb-2 font-medium font-noto" >{urlSchema.name.length}/21</h2>
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-2 font-medium font-noto" >Url name
+                    </h2>
+                    <input 
+                      placeholder="My youtube channel" 
+                      name='name' 
+                      onChange={(e) => handleUrlSchema(e)} 
+                      value={urlSchema.name} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="text" 
+                    />
+                    <h2 
+                      style={{ textAlign: 'right', fontSize: 14.4 }} 
+                      className="pb-2 font-medium font-noto" >{urlSchema.name.length}/21
+                    </h2>
                   </div>
                   <div>
-                    <h2 style={{ fontSize: 16.4 }} className="pb-2 font-medium font-noto" >Original Url</h2>
-                    <input name='original_url' onChange={(e) => handleUrlSchema(e)} value={urlSchema.original_url} style={{ fontSize: 14 }} className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" type="text" />
+                    <h2 
+                      style={{ fontSize: 16.4 }} 
+                      className="pb-2 font-medium font-noto" >Original Url
+                    </h2>
+                    <input 
+                      name='original_url' 
+                      onChange={(e) => handleUrlSchema(e)} 
+                      value={urlSchema.original_url} 
+                      style={{ fontSize: 14 }} 
+                      className="font-noto rounded-xl bg-opacity-30 bg-[#cdd0b0] pb-3 pt-3 pr-3 pl-3" 
+                      type="text" 
+                    />
                   </div>
                   <div className="pb-2">
-                    <h2 style={{ fontSize: 14.4 }} className="text-[red] pl-1 pt-2 font-medium font-noto" >{error}</h2>
+                    <h2 
+                      style={{ fontSize: 14.4 }} 
+                      className="text-[red] pl-1 pt-2 font-medium font-noto" >{error}
+                    </h2>
                   </div>
-                  <div  className="justify-between flex pt-4">
+                  <div className="justify-between flex pt-4">
                     <div></div>
                     <button disabled={!isUrlSchemaValid} onClick={() => create()} style={{ cursor: isUrlSchemaValid ? 'pointer' : 'not-allowed', fontSize: 14 }} className="font-medium font-noto text-[white] rounded-2xl bg-[#404727] pb-4 pt-4 pr-7 pl-7" >Create</button>
                   </div>

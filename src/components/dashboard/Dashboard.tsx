@@ -68,7 +68,8 @@ const Dashboard = () => {
 
 
   const editUrl = async () => {
-    await axios.put(BASE_URL + "/url/change/" + inEditingUrl.url_id + "?name=" + inEditingUrl.name, {}, { headers: { "Authorization": `Bearer ${token}` } })
+    await axios.put(BASE_URL + "/url/change/" + inEditingUrl.url_id + "?name=" + inEditingUrl.name, 
+    {}, { headers: { "Authorization": `Bearer ${token}` } })
       .then(response => {
         setUrls(response.data.param.urls)
       })
@@ -90,28 +91,73 @@ const Dashboard = () => {
           isLoading ? (
             <div className='mt-24 items-center justify-around flex w-screen' >
               <div>
-                <div className='p-8 items-center justify-around flex' ><SpinnerDotted speed={140} thickness={140} size={54} color='#ccd0af' /></div>
-                <h2 style={{ fontSize: 24 }} className="text-[#404727] font-extrabold font-noto">Loading...</h2>
+                <div 
+                  className='p-8 items-center justify-around flex' >
+                  <SpinnerDotted 
+                    speed={140} 
+                    thickness={140} 
+                    size={54} 
+                    color='#ccd0af' 
+                  />
+                </div>
+                <h2 
+                  style={{ fontSize: 24 }} 
+                  className="text-[#404727] font-extrabold font-noto">Loading...
+                </h2>
               </div>
             </div>
           ) : (
             <div className='mt-24 items-center justify-around flex w-screen' >
               <div>
-                <div className='p-8 items-center justify-around flex' ><FaSadTear size={54} color='#ccd0af' /></div>
-                <h2 style={{ maxWidth: 340, fontSize: 24 }} className="text-center text-[#404727] font-extrabold font-noto">An Error occured while loading your dashboard :(. <span className='cursor-pointer' style={{ textDecoration: 'underline' }} onClick={() => navigate(0)} >Try Again</span></h2>
+                <div 
+                  className='p-8 items-center justify-around flex' >
+                    <FaSadTear size={54} color='#ccd0af' /></div>
+                <h2 
+                  style={{ maxWidth: 340, fontSize: 24 }} 
+                  className="text-center text-[#404727] font-extrabold font-noto">
+                  An Error occured while loading your 
+                  dashboard :(. 
+                  <span 
+                    className='cursor-pointer' 
+                    style={{ textDecoration: 'underline' }} 
+                    onClick={() => navigate(0)} >Try Again
+                  </span>
+                </h2>
               </div>
             </div>
           )
         ) : (
           <>
-            <CreateUrlModal setUrls={() => getUrls()} onClose={() => setCreateUrlModalOptions({ visible: false })} visible={createUrlModalOptions.visible} />
-            <Modal body={modalOptions.body} onClose={() => setModalOptions({ body: <div></div>, visible: false })} visible={modalOptions.visible} />
+            <CreateUrlModal 
+              setUrls={() => getUrls()} 
+              onClose={() => setCreateUrlModalOptions({ visible: false })} 
+              visible={createUrlModalOptions.visible} 
+            />
+            <Modal 
+              body={modalOptions.body} 
+              onClose={() => setModalOptions({ body: <div></div>, visible: false })} 
+              visible={modalOptions.visible} 
+            />
             <div>
               <div className="pb-4 p-14 justify-between flex">
-                <h2 style={{ fontSize: 24 }} className="text-[#404727] font-extrabold font-noto" >Your urls</h2>
+                <h2 
+                  style={{ fontSize: 24 }} 
+                  className="text-[#404727] font-extrabold font-noto" >Your urls
+                </h2>
                 <div className='flex'>
-                  <h2 style={{ fontSize: 24 }} className="text-[#ccd0af] font-extrabold font-noto" >{getUrlsQuantity()}/{maxUrls}</h2>
-                  <div className='items-center justify-around flex pl-2' ><IoIosAddCircle className='cursor-pointer' onClick={() => setCreateUrlModalOptions({ visible: true })} size={28} color='#404727' /></div>
+                  <h2
+                    style={{ fontSize: 24 }} 
+                    className="text-[#ccd0af] font-extrabold font-noto" >{getUrlsQuantity()}/{maxUrls}
+                  </h2>
+                  <div 
+                    className='items-center justify-around flex pl-2' >
+                    <IoIosAddCircle 
+                      className='cursor-pointer' 
+                      onClick={() => setCreateUrlModalOptions({ visible: true })} 
+                      size={28} 
+                      color='#404727' 
+                    />
+                  </div>
                 </div>
               </div>
               <div style={{ marginTop: 24}} >
@@ -121,90 +167,197 @@ const Dashboard = () => {
                       <div className="bg-[#fcfcfc] rounded-xl justify-between flex-block shadow-md p-6">
                         <div className='justify-around flex'>
                           <div className='items-center justify-around flex p-8'>
-                            <FaShareAlt className='cursor-pointer' onClick={() => setModalOptions({
-                              visible: true,
-                              body: 
-                                <div className='p-4'>
-                                  <div className='pl-6'>
-                                    <h2 style={{ width: 284, fontSize: 16 }} className="text-[#404727] font-bold font-noto" >
-                                      Your sharable tracked url:</h2>
-                                  </div>
-                                  <div className='items-center justify-around flex p-4'>
-                                    <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
-                                      <input onMouseOver={() => {
-                                        const d: any = document.querySelector("#original_url");
-                                        d.style.display = 'block'
-                                      }} onMouseOut={() => {
-                                        const d: any = document.querySelector("#original_url");
-                                        d.style.display = 'none' 
-                                      }} className='bg-[#fafafa]' value={"deleafly.pages.dev/" + url.shorted_url} disabled type="text"></input>
-                                      <div onClick={() => {
-                                          navigator.clipboard.writeText("https://deleafly.pages.dev/" + url.shorted_url); 
-                                          const d: any = document.querySelector("#copy-icon"); 
-                                          d.style.display = 'none'
-                                          const a: any = document.querySelector("#copied-icon");
-                                          a.style.display = 'block'
-                                        }} id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
-                                        <IoCopy id='copy-icon' color='white'/>
-                                        <MdFileDownloadDone className='hidden' id='copied-icon' color='white'/>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div id='original_url' style={{ display: "none", marginTop: -184 }} className='shadow-lg rounded-md pt-4 bg-[#fafafa] absolute'>
+                            <FaShareAlt
+                              className='cursor-pointer' 
+                              onClick={() => { 
+                                setModalOptions({
+                                visible: true,
+                                body:
+                                  <div className='p-4'>
                                     <div className='pl-6'>
                                       <h2 style={{ width: 284, fontSize: 16 }} className="text-[#404727] font-bold font-noto" >
-                                        Connected url:</h2>
+                                        Your sharable tracked url:</h2>
                                     </div>
-                                    <div className='items-center justify-around flex pl-0 pt-0 p-4'>
+                                    <div className='items-center justify-around flex p-4'>
                                       <div style={{ width: 254 }} className='rounded-md flex p-2 bg-[#fafafa]' >
-                                        <input className='cursor-not-allowed bg-[#fafafa]' value={url.original_url} disabled type="text"></input>
+                                        <input onMouseOver={() => {
+                                          const d: any = document.querySelector("#original_url");
+                                          d.style.display = 'block'
+                                        }} onMouseOut={() => {
+                                          const d: any = document.querySelector("#original_url");
+                                          d.style.display = 'none' 
+                                        }} className='bg-[#fafafa]' value={"deleafly.pages.dev/" + url.shorted_url} disabled type="text"></input>
+                                        <div onClick={() => {
+                                            navigator.clipboard.writeText("https://deleafly.pages.dev/" + url.shorted_url); 
+                                            const d: any = document.querySelector("#copy-icon"); 
+                                            d.style.display = 'none'
+                                            const a: any = document.querySelector("#copied-icon");
+                                            a.style.display = 'block'
+                                          }} id='copy' className='ml-4 rounded-md p-2 bg-[#ccd0af]'>
+                                          <IoCopy id='copy-icon' color='white'/>
+                                          <MdFileDownloadDone className='hidden' id='copied-icon' color='white'/>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div 
+                                      id='original_url' 
+                                      style={{ display: "none", marginTop: -184 }} 
+                                      className='shadow-lg rounded-md pt-4 bg-[#fafafa] absolute'>
+                                      <div className='pl-6'>
+                                        <h2 
+                                          style={{ width: 284, fontSize: 16 }} 
+                                          className="text-[#404727] font-bold font-noto" >
+                                          Connected url:
+                                        </h2>
+                                      </div>
+                                      <div 
+                                        className='items-center justify-around flex pl-0 pt-0 p-4'>
+                                        <div 
+                                          style={{ width: 254 }} 
+                                          className='rounded-md flex p-2 bg-[#fafafa]' >
+                                          <input 
+                                            className='cursor-not-allowed bg-[#fafafa]' 
+                                            value={url.original_url} 
+                                            disabled 
+                                            type="text">    
+                                          </input>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                            })} color='#404727' size={24} />
+                                })
+                              }}
+                              color='#404727' 
+                              size={24} 
+                            />
                           </div>
                         </div>
-                        <div className='items-center justify-around flex'>
+                        <div 
+                          className='items-center justify-around flex'>
                           <div>
-                            <div className='items-center flex'>
+                            <div 
+                              className='items-center flex'>
                               {
                                 inEditingUrl.url_id == url.url_id ? (
                                   inEditingUrl.name.length > 0 && inEditingUrl.name != url.name ? (
                                     <>
-                                      <input autoFocus onChange={(e) => setInEditingUrl({ url_id: url.url_id, name: e.target.value })} value={inEditingUrl.name} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
-                                      <div className='pl-3' ><IoSave className='cursor-pointer' size={24} color='gray' onClick={() => { setInEditingUrl({ url_id: 0, name: ''}); editUrl()}} /></div>
+                                      <input 
+                                        autoFocus 
+                                        onChange={(e) => setInEditingUrl({ 
+                                          url_id: url.url_id, 
+                                          name: e.target.value 
+                                        })} 
+                                        value={inEditingUrl.name} 
+                                        style={{ fontSize: 19 }} 
+                                        className="text-[#404727] font-extrabold font-noto" />
+                                      <div 
+                                        className='pl-3' >
+                                        <IoSave 
+                                          className='cursor-pointer' 
+                                          size={24} 
+                                          color='gray' 
+                                          onClick={() => { 
+                                            setInEditingUrl({ url_id: 0, name: ''}); 
+                                            editUrl()
+                                          }} 
+                                        />
+                                      </div>
                                     </>
                                   ) : (
                                     <>
-                                      <input autoFocus onChange={(e) => setInEditingUrl({ url_id: url.url_id, name: e.target.value})} value={inEditingUrl.name} style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" />
-                                      <div className='pl-3' ><IoClose className="cursor-pointer" size={24} color='gray' onClick={() => { setInEditingUrl({ url_id: 0, name: ''})}} /></div>
+                                      <input 
+                                        autoFocus 
+                                        onChange={(e) => {
+                                          setInEditingUrl({ 
+                                            url_id: url.url_id, 
+                                            name: e.target.value
+                                          })
+                                        }}
+                                        value={inEditingUrl.name} 
+                                        style={{ fontSize: 19 }} 
+                                        className="text-[#404727] font-extrabold font-noto" />
+                                      <div 
+                                        className='pl-3' >
+                                        <IoClose 
+                                          className="cursor-pointer" 
+                                          size={24} 
+                                          color='gray' 
+                                          onClick={() => { 
+                                            setInEditingUrl({ 
+                                              url_id: 0, 
+                                              name: ''
+                                            })
+                                          }} 
+                                        />
+                                      </div>
                                     </>
                                   )
                                 ) : (
                                   <>
-                                    <h2 style={{ fontSize: 19 }} className="text-[#404727] font-extrabold font-noto" >{url.name}</h2>
-                                    <div className='pl-4'><PiPencilSimpleLineFill className="cursor-pointer" size={24} color='gray' onClick={() => { setInEditingUrl({ url_id: url.url_id, name: url.name })}} /></div>
+                                    <h2 
+                                      style={{ fontSize: 19 }} 
+                                      className="text-[#404727] font-extrabold font-noto" >{url.name}
+                                    </h2>
+                                    <div 
+                                      className='pl-4'>
+                                      <PiPencilSimpleLineFill 
+                                        className="cursor-pointer" 
+                                        size={24} 
+                                        color='gray' 
+                                        onClick={() => { 
+                                          setInEditingUrl({ 
+                                            url_id: url.url_id, 
+                                            name: url.name 
+                                          })
+                                        }} 
+                                      />
+                                    </div>
                                   </>
                                 )
                               }
                             </div>
-                            <a target='_blank' href={`http://deleafly.pages.dev/${url.shorted_url}`}><h2 style={{ textDecoration: 'underline', fontSize: 17 }} className="text-[#ccd0af] font-extrabold font-noto" >deleafly.pages.dev/{url.shorted_url}</h2></a>
+                            <a 
+                              target='_blank' 
+                              href={`http://deleafly.pages.dev/${url.shorted_url}`}>
+                              <h2 
+                                style={{ textDecoration: 'underline', fontSize: 17 }} 
+                                className="text-[#ccd0af] font-extrabold font-noto" >
+                                deleafly.pages.dev/{url.shorted_url}
+                              </h2>
+                            </a>
                           </div>
                         </div>
                         <div className='none-block h-10' ></div>
-                        <div className='flex no-padding pl-24 items-center justify-around'>
+                        <div 
+                          className='flex no-padding pl-24 items-center justify-around'>
                           <div className='flex'>
-                            <div className='p-4'><ImStatsDots className="cursor-pointer" onClick={() => navigate(`/${url.shorted_url}/stats`)} color='#404727' size={24} /></div>
-                            <div className='p-4'><MdDelete opacity={urls.length > 1 || urls[currentPage].length > 1 ? "100%" : "40%"} className='cursor-pointer' onClick={() => {
-                              if(urls.length == 1 && urls[currentPage].length == 1){
-                                // not removable
-                              }else{
-                                removeUrl(url.url_id)
-                                if(urls[currentPage].length == 1)
-                                  setCurrentPage(currentPage-1)
-                              }
-                            }} color='#404727' size={28} /></div>
+                            <div 
+                              className='p-4'>
+                              <ImStatsDots 
+                                className="cursor-pointer" 
+                                onClick={() => navigate(`/${url.shorted_url}/stats`)} 
+                                color='#404727' 
+                                size={24} 
+                              />
+                            </div>
+                            <div 
+                              className='p-4'>
+                              <MdDelete 
+                                opacity={urls.length > 1 || urls[currentPage].length > 1 ? "100%" : "40%"} 
+                                className='cursor-pointer' 
+                                onClick={() => {
+                                  if(urls.length == 1 && urls[currentPage].length == 1){
+                                    // not removable
+                                  }else{
+                                    removeUrl(url.url_id)
+                                    if(urls[currentPage].length == 1)
+                                      setCurrentPage(currentPage-1)
+                                  }
+                                }} 
+                                color='#404727' 
+                                size={28} 
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -214,11 +367,26 @@ const Dashboard = () => {
               </div>
               <div className='justify-around flex p-14'>
                 <div className='items-center flex'>
-                  <BiSolidLeftArrowCircle opacity={currentPage == 0 ? "40%" : "100%"} className='cursor-pointer' onClick={() => currentPage == 0 ? {} : setCurrentPage(currentPage-1)} size={28} color='#404727' />
+                  <BiSolidLeftArrowCircle 
+                    opacity={currentPage == 0 ? "40%" : "100%"} 
+                    className='cursor-pointer' 
+                    onClick={() => currentPage == 0 ? {} : setCurrentPage(currentPage-1)} 
+                    size={28} 
+                    color='#404727' 
+                  />
                   <div className='pr-4 pl-4'>
-                    <h2 style={{ fontSize: 18 }} className="text-[#404727] font-extrabold font-noto" >{currentPage+1}/{urls.length}</h2>
+                    <h2 
+                      style={{ fontSize: 18 }} 
+                      className="text-[#404727] font-extrabold font-noto" >{currentPage+1}/{urls.length}
+                    </h2>
                   </div>
-                  <BiSolidRightArrowCircle opacity={currentPage == urls.length - 1 ? "40%" : "100%"} className='cursor-pointer' onClick={() => currentPage == urls.length - 1 ? {} : setCurrentPage(currentPage+1)} size={28} color='#404727' />
+                  <BiSolidRightArrowCircle 
+                    opacity={currentPage == urls.length - 1 ? "40%" : "100%"} 
+                    className='cursor-pointer' 
+                    onClick={() => currentPage == urls.length - 1 ? {} : setCurrentPage(currentPage+1)} 
+                    size={28} 
+                    color='#404727' 
+                  />
                 </div>
               </div>
             </div>

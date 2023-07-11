@@ -16,18 +16,18 @@ const ShortedUrl = () => {
       ipv4: res.data.IPv4,
       country_code: res.data.country_code
     })
-    .then(response => window.location.href = "https://" + response.data.param.original_url)
-    .catch(error => create())
+      .then(response => window.location.href = "https://" + response.data.param.original_url)
+      .catch(error => create())
     return
   }
 
   useEffect(() => {
     create()
-  },[])
+  }, [])
 
-return (
-  <></>
-);
+  return (
+    <></>
+  );
 }
 
 export default ShortedUrl;
