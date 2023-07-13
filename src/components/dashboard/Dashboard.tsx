@@ -120,7 +120,7 @@ const Dashboard = () => {
                   <span 
                     className='cursor-pointer' 
                     style={{ textDecoration: 'underline' }} 
-                    onClick={() => navigate(0)} >Try Again
+                    onClick={() => getUrls()} >Try Again
                   </span>
                 </h2>
               </div>

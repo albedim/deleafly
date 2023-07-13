@@ -3,9 +3,7 @@ import { IoLogIn, IoMenu } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import SigninModal from "../modal/SigninModal";
 import { useState } from "react";
-import jwtDecode from "jwt-decode";
 import UserMenu from "./UserMenu";
-import AccountModal from "../modal/AcountModal";
 import MobileHeader from "../mobile_header/MobileHeader";
 
 
@@ -29,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <div className="hover-p justify-between items-center flex w-screen pb-14 pt-14">
-      <MobileHeader 
+      <MobileHeader
         onClose={() => setMobileHeaderVisible(false)} 
         visible={mobileHeaderVisible} 
         route_name={route_name}
