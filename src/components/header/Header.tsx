@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({
         visible={signinModalOptions.visible} 
       />
       <Logo 
-        style={{ paddingLeft: 40 }} 
+        style={{ paddingLeft: 40 }}
         class_name="flex-none" 
       />
       <Logo 
